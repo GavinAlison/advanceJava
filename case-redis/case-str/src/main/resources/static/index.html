@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>redis sortedset 命令案例-活跃度</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/iview/2.14.0/styles/iview.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+<div id="app">
+    <div class="layout">
+        <layout>
+            <i-header>
+                <i-menu mode="horizontal" theme="dark" active-name="1" >
+                    <div class="layout-nav">
+                    </div>
+                </i-menu>
+            </i-header>
+            <i-content :style="{padding: '0 50px'}">
+                <row>
+                    <i-col>
+                        <card>
+                            <row>
+
+                                <i-col span="24">
+                                    <i-button @click="changeSortType" type="ghost" icon="plus-circled">{{ sortName }}</i-button>
+                                </i-col>
+
+                            </row>
+                            <row>
+                                <i-col span="24">
+                                    <Card dis-hover v-for="item in listData" style="margin: 5px 0">
+                                        <p slot="title">
+                                            <Icon type="clock"></Icon>
+                                            {{ item.score }}
+                                        </p>
+                                        <a href="#" slot="extra" @click="rank('ASC',item.value)" style="padding-right: 20px">
+                                            <Icon type="navicon-round"></Icon>
+                                            升序排名
+                                        </a>
+                                        <a href="#" slot="extra" @click="rank('DESC',item.value)" style="padding-right: 20px">
+                                            <Icon type="navicon-round"></Icon>
+                                            降序排名
+                                        </a>
+                                        <a href="#" slot="extra" @click="star('UP',item.value)" style="padding-right: 20px">
+                                            <Icon type="thumbsup"></Icon>
+                                            赞
+                                        </a>
+                                        <a  href="#" slot="extra" @click="star('DOWN',item.value)">
+                                            <Icon type="thumbsdown"></Icon>
+                                            踩
+                                        </a>
+                                        {{ item.value }}
+                                    </Card>
+                                </i-col>
+                            </row>
+                        </card>
+                    </i-col>
+                </row>
+            </i-content>
+        </layout>
+    </div>
+</div>
+</body>
+</html>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/iview/2.14.0/iview.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
+
+<script type="text/javascript" src="js/sortSet.js"></script>
