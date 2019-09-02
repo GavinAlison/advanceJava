@@ -16,7 +16,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/contacts")
-public class ContactController {
+public class ContactHashController {
 
     private static final String CONTACTS_KEY_PREFIX = "contacts:";
 

@@ -15,7 +15,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/myLog")
-public class MyLogController {
+public class MyLogStrController {
     private static final String MY_LOG_REDIS_KEY_PREFIX = "myLog:";
     private static final String MY_LOG_REDIS_ID_KEY = "myLogID";
 
