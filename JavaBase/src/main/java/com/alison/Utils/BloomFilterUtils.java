@@ -1,17 +1,22 @@
 package com.alison.Utils;
 
+import lombok.Data;
+
 /**
  * @description: 用于去重
  * @link  https://yao2san.com/article/2053
  */
 public class BloomFilterUtils {
 
+    @Data
     public static class BloomFilter {
         private float tolerance;
         private int capacity;
-
+        // 一个字符对应有hashFunNum个位数， hash的次数
         private int hashFunNum;
+        // 实际存储的bit位
         private boolean[] bitArray;
+        // bit数组的位数
         private int bitArrayLen;
 
         public void init(float tolerance, int capacity) {
@@ -41,12 +46,13 @@ public class BloomFilterUtils {
         }
 
         public void put(String value) {
+            // 设置对应的位数为1
             int[] index = index(value);
             for (int idx : index) {
                 bitArray[idx] = true;
             }
         }
-
+        // 获取value值对应的bit位下标
         private int[] index(String value) {
             int[] res = new int[hashFunNum];
             int h = hash(value);
@@ -60,50 +66,10 @@ public class BloomFilterUtils {
             }
             return res;
         }
-
+        // 获取value的hashcode
         private int hash(String value) {
             int h = value.hashCode();
             return h;
-        }
-
-        public float getTolerance() {
-            return tolerance;
-        }
-
-        public void setTolerance(float tolerance) {
-            this.tolerance = tolerance;
-        }
-
-        public int getHashFunNum() {
-            return hashFunNum;
-        }
-
-        public void setHashFunNum(int hashFunNum) {
-            this.hashFunNum = hashFunNum;
-        }
-
-        public boolean[] getBitArray() {
-            return bitArray;
-        }
-
-        public void setBitArray(boolean[] bitArray) {
-            this.bitArray = bitArray;
-        }
-
-        public int getCapacity() {
-            return capacity;
-        }
-
-        public void setCapacity(int capacity) {
-            this.capacity = capacity;
-        }
-
-        public int getBitArrayLen() {
-            return bitArrayLen;
-        }
-
-        public void setBitArrayLen(int bitArrayLen) {
-            this.bitArrayLen = bitArrayLen;
         }
     }
 
