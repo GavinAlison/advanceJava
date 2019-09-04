@@ -376,6 +376,7 @@ public class StringCommand extends BaseConnection {
      */
     @Test
     public void bitCount() {
+        System.out.println((int)'a');
         jedis.set("bitcountKey", "bitcountValue");
 
         Long bitCount = jedis.bitcount("bitcountKey");
@@ -402,7 +403,6 @@ public class StringCommand extends BaseConnection {
      */
     @Test
     public void bitop() {
-
     }
 
     /**
