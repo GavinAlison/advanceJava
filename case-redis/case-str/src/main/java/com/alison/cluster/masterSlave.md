@@ -28,6 +28,10 @@ slave 启动，
 
 
 ### master/slave复制原理
+**精简**
+连接建立阶段、数据同步阶段、命令传播阶段
+
+**详细：**
 1.  设置主服务器的地址和端口
 2.  建立套接字连接
 3.  发送PING命令
@@ -79,9 +83,11 @@ slave 启动，
 -   master/slave, sentinel, cluster的区别
 -   slaveof 配置主数据库出错，提示condition on socket for SYNC: Connection refused， 
     发现原因： slaveof 不支持localhost, 在配置文件中"bind 0.0.0.0", 不要配置127.0.0.1, 或者配置真实ip地址
--   其他可参考问题--https://www.cnblogs.com/sz-jack/p/5156913.html， https://blog.csdn.net/chwshuang/article/details/54929277
--   
-    
+-   其他可参考问题--https://www.cnblogs.com/sz-jack/p/5156913.html， 
+https://blog.csdn.net/chwshuang/article/details/54929277, 
+https://www.cnblogs.com/kismetv/p/9236731.html
+
+        
 
 
 
