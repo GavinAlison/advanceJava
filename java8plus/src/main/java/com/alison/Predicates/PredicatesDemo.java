@@ -15,5 +15,12 @@ public class PredicatesDemo {
 
         Predicate<String> isEmpty = String::isEmpty;
         Predicate<String> isNotEmpty = isEmpty.negate();
+
+        Predicate<String> lte = s -> s.length() <= 0;
+        System.out.println("" + lte.equals(""));
+    }
+
+    public static boolean getZero(String s) {
+        return s.length() > 0;
     }
 }
