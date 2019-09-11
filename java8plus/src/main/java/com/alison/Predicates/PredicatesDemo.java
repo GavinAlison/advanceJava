@@ -1,5 +1,7 @@
 package com.alison.Predicates;
 
+import com.alison.Interfaces.Formula;
+
 import java.util.Objects;
 import java.util.function.Predicate;
 
@@ -18,6 +20,9 @@ public class PredicatesDemo {
 
         Predicate<String> lte = s -> s.length() <= 0;
         System.out.println("" + lte.equals(""));
+
+        Formula formula = (a) -> (a + 1.0);
+        System.out.println(formula.calculate(9));
     }
 
     public static boolean getZero(String s) {
