@@ -1,11 +1,16 @@
 package com.alison.Utils;
 
+import lombok.Data;
+
 /**
  * @description: 用于去重
  * @link  https://yao2san.com/article/2053
  */
+
 public class BloomFilterUtils {
 
+
+    @Data
     public static class BloomFilter {
         private float tolerance;
         private int capacity;
@@ -66,45 +71,6 @@ public class BloomFilterUtils {
             return h;
         }
 
-        public float getTolerance() {
-            return tolerance;
-        }
-
-        public void setTolerance(float tolerance) {
-            this.tolerance = tolerance;
-        }
-
-        public int getHashFunNum() {
-            return hashFunNum;
-        }
-
-        public void setHashFunNum(int hashFunNum) {
-            this.hashFunNum = hashFunNum;
-        }
-
-        public boolean[] getBitArray() {
-            return bitArray;
-        }
-
-        public void setBitArray(boolean[] bitArray) {
-            this.bitArray = bitArray;
-        }
-
-        public int getCapacity() {
-            return capacity;
-        }
-
-        public void setCapacity(int capacity) {
-            this.capacity = capacity;
-        }
-
-        public int getBitArrayLen() {
-            return bitArrayLen;
-        }
-
-        public void setBitArrayLen(int bitArrayLen) {
-            this.bitArrayLen = bitArrayLen;
-        }
     }
 
     public static void main(String[] args) {
