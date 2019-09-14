@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: demo1
+  cloud:
+    config:
+      uri: http://${CONFIG_HOST}:7998
+      fail-fast: true
+      password: ${CONFIG_SERVICE_PASSWORD:simple}
+      username: user
+      name: demo1

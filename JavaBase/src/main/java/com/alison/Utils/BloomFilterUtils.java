@@ -14,9 +14,11 @@ public class BloomFilterUtils {
     public static class BloomFilter {
         private float tolerance;
         private int capacity;
-
+        // 一个字符对应有hashFunNum个位数， hash的次数
         private int hashFunNum;
+        // 实际存储的bit位
         private boolean[] bitArray;
+        // bit数组的位数
         private int bitArrayLen;
 
         public void init(float tolerance, int capacity) {
@@ -46,12 +48,13 @@ public class BloomFilterUtils {
         }
 
         public void put(String value) {
+            // 设置对应的位数为1
             int[] index = index(value);
             for (int idx : index) {
                 bitArray[idx] = true;
             }
         }
-
+        // 获取value值对应的bit位下标
         private int[] index(String value) {
             int[] res = new int[hashFunNum];
             int h = hash(value);
@@ -70,7 +73,6 @@ public class BloomFilterUtils {
             int h = value.hashCode();
             return h;
         }
-
     }
 
     public static void main(String[] args) {

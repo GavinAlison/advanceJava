@@ -1,0 +1,24 @@
+spring:
+  security:
+    user:
+      password: ${CONFIG_SERVICE_PASSWORD}
+
+server:
+  port: 7998
+---
+spring:
+  profiles: git
+  cloud:
+    config:
+      server:
+        git:
+          uri: ${CONFIG_GIT_URL}
+          search-paths: /{application}
+---
+spring:
+  profiles: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:${CONFIG_FILE_PATH}

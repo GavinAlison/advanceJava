@@ -1,0 +1,20 @@
+bind 192.168.56.103
+protected-mode yes
+port 7005
+daemonize yes
+loglevel notice
+logfile "/usr/local/redis/cluster/7005.log"
+
+dir /usr/local/redis/cluster/7005
+appendonly yes
+appendfilename "appendonly.aof"
+appendfsync everysec
+#### REDIS CLUSTER  #######
+# 开启Cluster
+cluster-enabled yes
+# 集群配置文件 这个配置文件不是要我们去配的，而是Redis运行时保存配置的文件
+cluster-config-file nodes-7005.conf
+# 集群超时时间
+cluster-node-timeout 5000
+# 槽是否全覆盖 默认是yes，只要有结点宕机导致16384个槽没全被覆盖，整个集群就全部停止服务，所以一定要改为no
+cluster-require-full-coverage no
