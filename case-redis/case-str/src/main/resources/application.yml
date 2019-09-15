@@ -1,7 +1,7 @@
 server:
   port: 80
 #  servlet:
-#    context-path: redis
+#    context-path: /redis
 
 # redis config
 spring:
