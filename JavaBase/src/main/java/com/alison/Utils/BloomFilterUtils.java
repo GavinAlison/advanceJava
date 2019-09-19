@@ -9,7 +9,6 @@ import lombok.Data;
 
 public class BloomFilterUtils {
 
-
     @Data
     public static class BloomFilter {
         private float tolerance;
