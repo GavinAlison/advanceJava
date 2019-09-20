@@ -9,7 +9,7 @@
 8.  [Redis 复制、Sentinel的搭建和原理说明](https://www.cnblogs.com/zhoujinyi/p/5570024.html)
 9.  [Redis cluster配置](https://github.com/GavinAlison/advanceJava/tree/master/case-redis/case-str/src/main/java/com/alison/cluster)
 10. [Redis pubsub](https://github.com/GavinAlison/advanceJava/tree/master/case-redis/case-str/src/main/java/com/alison/pubsub)
-11. [Spring Redis pubsub]()
+11. [Spring Redis pubsub](https://github.com/GavinAlison/advanceJava/tree/master/case-redis/pubsub)
 
 
 
