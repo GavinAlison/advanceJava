@@ -18,19 +18,19 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         ByteBuf in = (ByteBuf) msg;
-        System.out.println("Server received: " + in.toString(CharsetUtil.UTF_8));        //2
-        ctx.write(in);                            //3
+        System.out.println("Server received: " + in.toString(CharsetUtil.UTF_8));        //2 日志消息输出到控制台
+        ctx.write(in);                            //3 将所接收的消息返回给发送者。注意，这还没有冲刷数据
     }
 //    通知处理器最后的 channelRead() 是当前批处理中的最后一条消息时调用
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-        ctx.writeAndFlush(Unpooled.EMPTY_BUFFER)//4
+        ctx.writeAndFlush(Unpooled.EMPTY_BUFFER)//4 冲刷所有待审消息到远程节点。关闭通道后，操作完成
                 .addListener(ChannelFutureListener.CLOSE);
     }
 //    读操作时捕获到异常时调用
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-        cause.printStackTrace();                //5
-        ctx.close();                            //6
+        cause.printStackTrace();                //5 打印异常堆栈跟踪
+        ctx.close();                            //6 关闭通道
     }
 }
