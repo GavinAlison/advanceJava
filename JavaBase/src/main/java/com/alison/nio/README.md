@@ -7,3 +7,11 @@
 
 
 
+
+##  说明文档
+http://tutorials.jenkov.com/java-nio/channels.html
+
+### nio channel 
+-   FileChannel
+
+

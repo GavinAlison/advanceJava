@@ -6,20 +6,20 @@ import java.nio.channels.FileChannel;
 
 public class TestScatterAndGather {
     public static void main(String[] args) {
-        String filePath = TestScatterAndGather.class.getResource("testScatterAndGather.txt").getPath();
+        String filePath = TestScatterAndGather.class.getResource("/testScatterAndGather.txt").getPath();
 
         try (RandomAccessFile file = new RandomAccessFile(filePath,"rw");
              FileChannel channel = file.getChannel()) {
-
             //容量
             ByteBuffer header = ByteBuffer.allocate(4);
             ByteBuffer body = ByteBuffer.allocate(16);
             ByteBuffer[] bufferArray = { header, body };
-            //读取
+            //读取 Scattering Reads
             while (channel.read(bufferArray) != -1){
-
                 header.flip();
                 body.flip();
+//                Gathering Writes
+//                channel.write(bufferArray);
 
                 System.out.println("------header------");
                 while (header.hasRemaining()){
