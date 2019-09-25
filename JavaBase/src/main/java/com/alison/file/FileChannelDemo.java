@@ -134,6 +134,7 @@ public class FileChannelDemo {
             }
         }
     }
+
     private static void copyByNIOTransfer(String srcPath, String dstPath) {
         FileInputStream fis = null;
         FileOutputStream fos = null;
@@ -180,6 +181,7 @@ public class FileChannelDemo {
             }
         }
     }
+
     private static void copyByFiles(String srcPath, String dstPath) {
         Path path = Paths.get(srcPath);
         FileOutputStream fos = null;
@@ -225,24 +227,22 @@ public class FileChannelDemo {
             Thread[] threads = new Thread[num];
             for (int i = 0; i < num; i++) {
                 final int index = i;
-                threads[i] = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        byte[] buffer = (index + ". " + (new Date()).toString() + " hello world!xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx welcome to Newland\r\n").getBytes();
-                        try {
-                            thisFos.write(buffer);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        countDownLatch.countDown();
+                threads[i] = new Thread(() -> {
+                    byte[] buffer = (index + ". " + (new Date()).toString() + " hello world!xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx welcome to Newland\r\n").getBytes();
+                    try {
+                        thisFos.write(buffer);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
+                    countDownLatch.countDown();
                 });
             }
             for (int i = 0; i < num; i++) {
                 threads[i].start();
             }
             countDownLatch.await();
-        } catch (FileNotFoundException e) {
+        } catch (
+                FileNotFoundException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -255,6 +255,7 @@ public class FileChannelDemo {
                 }
             }
         }
+
     }
 
     private static void multiThreadWriteNIO(String path) {
@@ -310,32 +311,29 @@ public class FileChannelDemo {
         final Object obj = new Object();
         for (int i = 0; i < num; i++) {
             final int index = i;
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    RandomAccessFile raf = null;
-                    synchronized (obj) {
-                        try {
-                            raf = new RandomAccessFile(path, "rw");
-                            raf.seek(raf.length());
-                            byte[] buffer = (index + ". " + (new Date()).toString() + " hello world!xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx welcome to Newland\r\n").getBytes();
-                            raf.write(buffer);
-                        } catch (FileNotFoundException e1) {
-                            e1.printStackTrace();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } finally {
-                            if (raf != null) {
-                                try {
-                                    raf.close();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+            new Thread(() -> {
+                RandomAccessFile raf = null;
+                synchronized (obj) {
+                    try {
+                        raf = new RandomAccessFile(path, "rw");
+                        raf.seek(raf.length());
+                        byte[] buffer = (index + ". " + (new Date()).toString() + " hello world!xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx welcome to Newland\r\n").getBytes();
+                        raf.write(buffer);
+                    } catch (FileNotFoundException e1) {
+                        e1.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        if (raf != null) {
+                            try {
+                                raf.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
                             }
                         }
                     }
-                    countDownLatch.countDown();
                 }
+                countDownLatch.countDown();
             }).start();
         }
         try {
@@ -414,8 +412,8 @@ public class FileChannelDemo {
         }
     }
 
-    private static final int[] NUM_KB_ARR = { 1, 10, 100, 1024, 10 * 1024, 100 * 1024 };
-    private static final int[] BUFF_SIZE_ARR = { 256, 1024, 8192 };
+    private static final int[] NUM_KB_ARR = {1, 10, 100, 1024, 10 * 1024, 100 * 1024};
+    private static final int[] BUFF_SIZE_ARR = {256, 1024, 8192};
     private static int bufferSize = 8192;
     private static long beginTime;
 
@@ -423,7 +421,7 @@ public class FileChannelDemo {
         if (msg == null) {
             beginTime = System.nanoTime();
         } else {
-            System.out.println(msg + "\tcost\t" + String.format("%011d", System.nanoTime() - beginTime) + "us");
+            System.out.println(msg + "\tcost\t" + String.format("%011.2f", (System.nanoTime() - beginTime) / (1000.0 * 1000)) + "s");
         }
     }
 
@@ -456,16 +454,16 @@ public class FileChannelDemo {
                 createFile(testPath, NUM_KB_ARR[j]);
                 calcCostTime("createFile\t\t" + numKBStr);
                 calcCostTime(null);
-                copyByIO(testPath, bufferSize+"_"+ioOutputPath);
+                copyByIO(testPath, bufferSize + "_" + ioOutputPath);
                 calcCostTime("copyByIO\t\t" + numKBStr);
                 calcCostTime(null);
-                copyByNIO(testPath, bufferSize+"_"+nioOutputPath);
+                copyByNIO(testPath, bufferSize + "_" + nioOutputPath);
                 calcCostTime("copyByNIO\t\t" + numKBStr);
                 calcCostTime(null);
-                copyByNIOTransfer(testPath, bufferSize+"_"+nioTransferOutputPath);
+                copyByNIOTransfer(testPath, bufferSize + "_" + nioTransferOutputPath);
                 calcCostTime("copyByNIOTransfer\t" + numKBStr);
                 calcCostTime(null);
-                copyByFiles(testPath, bufferSize+"_"+nioFilesPath);
+                copyByFiles(testPath, bufferSize + "_" + nioFilesPath);
                 calcCostTime("copyByFiles\t\t" + numKBStr);
             }
             System.out.println();
