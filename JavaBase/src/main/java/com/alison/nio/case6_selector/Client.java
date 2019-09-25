@@ -17,9 +17,9 @@ public class Client {
     }
 
     public void connect() {
-        try (SocketChannel sc = SocketChannel.open()) {
+        try (SocketChannel socketChannel = SocketChannel.open()) {
             //进行连接
-            sc.connect(inetSocketAddress);
+            socketChannel.connect(inetSocketAddress);
 
             while(true){
                 //定义一个字节数组，然后使用系统录入功能：
@@ -32,11 +32,11 @@ public class Client {
                 //对缓冲区进行复位
                 buf.flip();
                 //写出数据
-                sc.write(buf);
+                socketChannel.write(buf);
                 //清空缓冲区数据
                 buf.clear();
 
-                sc.read(buf);
+                socketChannel.read(buf);
                 buf.flip();
 
 
@@ -48,8 +48,12 @@ public class Client {
                 System.out.println("服务端返回数据: " + body);
 
                 buf.clear();
-
+                if (new String(bytes).trim().equals("bye")) {
+                    break;
+                }
             }
+            // nothing , 没啥用
+            socketChannel.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

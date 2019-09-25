@@ -22,16 +22,17 @@ public class Server{
             //1 打开路复用器
             this.seletor = Selector.open();
             //2 打开服务器通道
-            ServerSocketChannel ssc = ServerSocketChannel.open();
+            ServerSocketChannel channel = ServerSocketChannel.open();
             //3 设置服务器通道为非阻塞模式
-            ssc.configureBlocking(false);
+            channel.configureBlocking(false);
             //4 绑定地址
-            ssc.bind(new InetSocketAddress(port));
+            channel.bind(new InetSocketAddress(port));
             //5 把服务器通道注册到多路复用器上，并且监听阻塞事件
-            ssc.register(this.seletor, SelectionKey.OP_ACCEPT);
-
+            channel.register(this.seletor, SelectionKey.OP_ACCEPT);
+            // 如果想注册多个event，可以将多建立几个channel，一个channel bind event
+//            If you are interested in more than one event, OR the constants together, like this:
+//            int interestSet = SelectionKey.OP_READ | SelectionKey.OP_WRITE;
             System.out.println("服务开启, 端口号:" + port);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -68,9 +69,7 @@ public class Server{
                         if(key.isConnectable()){
                             this.connectable(key);
                         }
-
                     }
-
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -105,9 +104,9 @@ public class Server{
 
             readBuf.clear();
             //2 获取之前注册的socket通道对象
-            SocketChannel sc = (SocketChannel) key.channel();
+            SocketChannel channel = (SocketChannel) key.channel();
             //3 读取数据
-            int count = sc.read(readBuf);
+            int count = channel.read(readBuf);
             //4 如果没有数据
             if(count == -1){
                 key.channel().close();
@@ -129,10 +128,9 @@ public class Server{
             readBuf.put(("我已经收到数据："+body).getBytes());
             readBuf.flip();
 
-            sc.write(readBuf);
+            channel.write(readBuf);
 
             readBuf.clear();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -146,13 +144,13 @@ public class Server{
     private void accept(SelectionKey key) {
         try {
             //1 获取服务通道
-            ServerSocketChannel ssc =  (ServerSocketChannel) key.channel();
+            ServerSocketChannel serverSocketChannel =  (ServerSocketChannel) key.channel();
             //2 执行阻塞方法
-            SocketChannel sc = ssc.accept();
+            SocketChannel socketChannel = serverSocketChannel.accept();
             //3 设置阻塞模式
-            sc.configureBlocking(false);
+            socketChannel.configureBlocking(false);
             //4 注册到多路复用器上，并设置读取标识
-            sc.register(this.seletor, SelectionKey.OP_READ);
+            socketChannel.register(this.seletor, SelectionKey.OP_READ);
         } catch (IOException e) {
             e.printStackTrace();
         }
