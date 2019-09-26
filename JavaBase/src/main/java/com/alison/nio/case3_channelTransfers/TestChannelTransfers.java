@@ -1,13 +1,13 @@
 package com.alison.nio.case3_channelTransfers;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.RandomAccessFile;
-import java.nio.ByteBuffer;
-import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 
 public class TestChannelTransfers {
-    public static void main(String[] args) {
+
+    private static void transfer() {
         String fromPath = TestChannelTransfers.class.getResource("/fromFile.txt").getPath();
         String toPath = TestChannelTransfers.class.getResource("/toFile.txt").getPath();
         try (RandomAccessFile fromFile = new RandomAccessFile(fromPath, "rw");
@@ -27,5 +27,24 @@ public class TestChannelTransfers {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static void transferTo() {
+        String fromFileName = "/fromFile.txt";
+        String toFileName = "/toFile.txt";
+        fromFileName = TestChannelTransfers.class.getResource(fromFileName).getPath();
+        toFileName = TestChannelTransfers.class.getResource(toFileName).getPath();
+        try (FileChannel in = new FileInputStream(fromFileName).getChannel();
+             FileChannel out = new FileOutputStream(toFileName).getChannel()) {
+            // 只是将in transfer to out，变化的是class下的文件，对于resources下的文件没有变
+            in.transferTo(0, (int) in.size(), out);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+//        transfer();
+        transferTo();
     }
 }

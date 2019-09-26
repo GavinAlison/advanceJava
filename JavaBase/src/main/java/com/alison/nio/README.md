@@ -27,3 +27,11 @@ Java NIO引入了选择器的概念，选择器用于监听多个通道的事件
 -   
 
 
+##  FAQ
+1.为什么需要selector?
+selector 是多路复用器， 普通的io, 通过socket -->I/O, 每次都需要一个线程；
+selector 的模式， socket-->channel --> selector ---> I/O, 一个selector需要一个线程，
+多个socket 有多个channel , 所以说单个线程可以监听多个数据通道
+
+
+
