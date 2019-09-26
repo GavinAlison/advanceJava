@@ -2,6 +2,8 @@ package com.alison.nio.case3_channelTransfers;
 
 import java.io.FileOutputStream;
 import java.io.RandomAccessFile;
+import java.nio.ByteBuffer;
+import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 
 public class TestChannelTransfers {
@@ -21,6 +23,7 @@ public class TestChannelTransfers {
 //            因此，SocketChannel可能不会将请求的所有数据(count个字节)全部传输到FileChannel中。
 //            toChannel.transferFrom(fromchannel, 0, fromchannel.size());
             fromchannel.transferTo(0, fromchannel.size(), toChannel);
+            System.out.println(toChannel);
         } catch (Exception e) {
             e.printStackTrace();
         }
