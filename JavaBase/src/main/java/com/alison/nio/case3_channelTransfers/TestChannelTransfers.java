@@ -21,7 +21,7 @@ public class TestChannelTransfers {
 //            如果源通道的剩余空间小于 count 个字节，则所传输的字节数要小于请求的字节数。此外要注意，
 //            在SoketChannel的实现中，SocketChannel只会传输此刻准备好的数据（可能不足count字节）。
 //            因此，SocketChannel可能不会将请求的所有数据(count个字节)全部传输到FileChannel中。
-//            toChannel.transferFrom(fromchannel, 0, fromchannel.size());
+            toChannel.transferFrom(fromchannel, 0, fromchannel.size());
             fromchannel.transferTo(0, fromchannel.size(), toChannel);
             System.out.println(toChannel);
         } catch (Exception e) {
