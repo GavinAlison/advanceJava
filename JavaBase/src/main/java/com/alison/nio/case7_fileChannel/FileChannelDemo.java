@@ -1,4 +1,4 @@
-package com.alison.nio.case4_fileChannel;
+package com.alison.nio.case7_fileChannel;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -65,6 +65,7 @@ public class FileChannelDemo {
             FileOutputStream fileOutputStream = new FileOutputStream(filePath);
             FileChannel fileChannel = fileOutputStream.getChannel();
             String newData = "New String: " + System.nanoTime();
+            log.info("newData: " + newData);
             ByteBuffer byteBuffer = ByteBuffer.allocate(48);
             byteBuffer.clear();
             byteBuffer.put(newData.getBytes());
@@ -74,13 +75,31 @@ public class FileChannelDemo {
             log.info("file size: " + fileChannel.size());
 //            FileChannel Position
 //            You can obtain the current position of the FileChannel object by calling the position() method.
-            fileChannel.position(2);
+//            fileChannel.position(4);
 //            FileChannel Truncate
-            fileChannel.truncate(1);
+            fileChannel.truncate(4);
 //            FileChannel Force   ---->flush cache to disk
 //            fileChannel.force(true);
             while (byteBuffer.hasRemaining()) {
                 fileChannel.write(byteBuffer);
+            }
+            fileChannel.force(true);
+            FileInputStream fileInputStream = new FileInputStream(filePath);
+            FileChannel intputChannel = fileInputStream.getChannel();
+            log.info("file size: " + intputChannel.size());
+
+            intputChannel.position(4);
+            log.info("inputchannel position: " + intputChannel.position());
+            ByteBuffer byteBufferOffset = ByteBuffer.allocate(48);
+
+            StringBuilder sb = new StringBuilder();
+            while (intputChannel.read(byteBufferOffset) != -1) {
+                byteBufferOffset.flip();
+                while (byteBufferOffset.hasRemaining()) {
+                    sb.append((char) byteBufferOffset.get());
+                }
+                log.info("offset: 4, content: " + sb.toString());
+                byteBufferOffset.clear();
             }
         } catch (Exception e) {
             e.printStackTrace();
