@@ -2,9 +2,9 @@ package com.alison.nio.case4_fileChannel;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.nio.ByteBuffer;
+import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 
 @Slf4j
@@ -84,6 +84,62 @@ public class FileChannelDemo {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * #385 Write data in chunks, needed if writing large amounts of data
+     *
+     * @param fileReadChannel
+     * @param fileWriteChannel
+     * @throws IOException
+     * @throws CannotWriteException
+     */
+    private void writeDataInChunks(FileChannel fileReadChannel, FileChannel fileWriteChannel) throws IOException, CannotWriteException {
+        long amountToBeWritten = fileReadChannel.size() - fileReadChannel.position();
+        long written = 0;
+        long chunksize = 20 * 1024 * 1024;//20M
+        long count = amountToBeWritten / chunksize;
+
+        long mod = amountToBeWritten % chunksize;
+        for (int i = 0; i < count; i++) {
+            written += fileWriteChannel.transferFrom(fileReadChannel, fileWriteChannel.position(), chunksize);
+            fileWriteChannel.position(fileWriteChannel.position() + chunksize);
+        }
+        written += fileWriteChannel.transferFrom(fileReadChannel, fileWriteChannel.position(), mod);
+        if (written != amountToBeWritten) {
+            throw new CannotWriteException("Was meant to write " + amountToBeWritten + " bytes but only written " + written + " bytes");
+        }
+    }
+
+    /**
+     * 读取文件到字符数组中
+     *
+     * @param file 文件
+     * @return 字符数组
+     */
+    public static byte[] readFile2BytesByMap(File file) {
+        if (file == null) return null;
+        FileChannel fc = null;
+        try {
+            fc = new RandomAccessFile(file, "r").getChannel();
+            MappedByteBuffer byteBuffer = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size()).load();
+            byte[] result = new byte[(int) fc.size()];
+            if (byteBuffer.remaining() > 0) {
+                byteBuffer.get(result, 0, byteBuffer.remaining());
+            }
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if (fc != null) {
+                try {
+                    fc.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
