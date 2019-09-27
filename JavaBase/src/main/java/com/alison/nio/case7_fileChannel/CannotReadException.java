@@ -1,4 +1,4 @@
-package com.alison.nio.case4_fileChannel;
+package com.alison.nio.case7_fileChannel;
 
 import java.io.IOException;
 

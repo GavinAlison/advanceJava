@@ -28,11 +28,12 @@ public class TestSocketAndServerSocket {
         SocketChannel socketChannel = channel.accept();
 
         ByteBuffer buffer = ByteBuffer.allocate(48);
-        while ((socketChannel.read(buffer)) != -1){
+        while ((socketChannel.read(buffer)) != -1) {
             buffer.flip();
 
-            while (buffer.hasRemaining()){
-                System.out.print((char)buffer.get());
+            while (buffer.hasRemaining()) {
+                // 一个byte一个byte读取，比如  h
+                System.out.print((char) buffer.get());
             }
 
             buffer.clear();
@@ -59,7 +60,7 @@ public class TestSocketAndServerSocket {
 
         buffer.put("hihihi".getBytes());
         buffer.flip();
-        while (buffer.hasRemaining()){
+        while (buffer.hasRemaining()) {
             socketChannel.write(buffer);
         }
 
