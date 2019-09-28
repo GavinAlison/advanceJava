@@ -1,3 +1,7 @@
+# NIO
+同步、非阻塞
+
+## menu
 1. Channel and Buffer
 2. Scatter and Gather
 3. Channel Transfers
@@ -46,10 +50,11 @@ selector 的模式， socket-->channel --> selector ---> I/O, 一个selector需�
 
 
 ## 参考链接
-1.  http://wiki.jikexueyuan.com/project/java-nio/pipe.html
-2.  https://blog.csdn.net/qq_36520235/article/details/81318189
-3.  https://tech.meituan.com/2016/11/04/nio.html
-4.  https://cloud.tencent.com/developer/article/1354567
+1.  [pipe](http://wiki.jikexueyuan.com/project/java-nio/pipe.html)
+2.  [什么是NIO？NIO的原理是什么机制？](https://blog.csdn.net/qq_36520235/article/details/81318189)
+3.  [Java NIO浅析](https://tech.meituan.com/2016/11/04/nio.html)
+4.  [文章相当全面的Java NIO教程](https://cloud.tencent.com/developer/article/1354567)
+5.  [java IO、NIO、AIO详解](https://www.cnblogs.com/sxkgeek/p/9488703.html)
 
 
 
