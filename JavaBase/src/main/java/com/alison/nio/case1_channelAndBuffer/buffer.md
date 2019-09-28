@@ -11,3 +11,17 @@
 -   clear() 与 compact() 方法
 -   mark() 与 reset() 方法
 -   equals() 与 compareTo() 方法
+
+
+Buffer的种类
+-   ByteBuffer
+-   MappedByteBuffer
+-   CharBuffer
+-   DoubleBuffer
+-   FloatBuffer
+-   IntBuffer
+-   LongBuffer
+-   ShortBuffer
+    
+    
+    

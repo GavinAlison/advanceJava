@@ -48,7 +48,6 @@ selector 的模式， socket-->channel --> selector ---> I/O, 一个selector需�
 多个socket 有多个channel , 所以说单个线程可以监听多个数据通道     
 
 
-
 ## 参考链接
 1.  [pipe](http://wiki.jikexueyuan.com/project/java-nio/pipe.html)
 2.  [什么是NIO？NIO的原理是什么机制？](https://blog.csdn.net/qq_36520235/article/details/81318189)
