@@ -13,24 +13,21 @@ public class Headers {
     private static final String EXCHANGE_NAME = "header_exchange";
 
     @Test
-    public void emitLogHeader() throws IOException {
-
+    public void send() throws IOException {
         String message = "message";
         String routingKey = "ourTestRoutingKey";
 
         Connection connection = ConnectionUtil.getRabbitConnection();
         Channel channel = connection.createChannel();
-
-        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.HEADERS);
+//        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.HEADERS);
 
         Map<String, Object> headers = new HashMap<>();
-        headers.put("aaa", "1234");
+        headers.put("api", "login");
         AMQP.BasicProperties.Builder builder = new AMQP.BasicProperties.Builder();
         builder.headers(headers);
-
         AMQP.BasicProperties theProps = builder.build();
 
-        channel.basicPublish(EXCHANGE_NAME, routingKey, theProps, message.getBytes("UTF-8"));
+        channel.basicPublish(EXCHANGE_NAME, "", theProps, message.getBytes("UTF-8"));
         System.out.println(" send:message: '" + message + "'");
     }
 
@@ -48,10 +45,11 @@ public class Headers {
 
         Map<String, Object> headers = new Hashtable<String, Object>();
         headers.put("x-match", "any");//all any
-        headers.put("aaa", "01234");
-        headers.put("bbb", "56789");
+        headers.put("api", "login");
+        headers.put("version", "1.0");
         // 为转发器指定队列，设置binding 绑定header键值对
-        channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, routingKey, headers);
+        String queuName = channel.queueDeclare().getQueue();
+        channel.queueBind(queuName, EXCHANGE_NAME, "", headers);
 
         System.out.println(" waiting...");
         Consumer consumer = new DefaultConsumer(channel) {
@@ -63,6 +61,7 @@ public class Headers {
             }
         };
         channel.basicConsume(QUEUE_NAME, true, consumer);
+        System.in.read();
     }
 
 }
