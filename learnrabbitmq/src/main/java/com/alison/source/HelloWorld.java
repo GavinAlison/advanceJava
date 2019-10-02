@@ -26,7 +26,7 @@ public class HelloWorld {
     }
 
     @Test
-    public void recv() throws IOException {
+    public void recv() throws Exception {
         Connection conn = ConnectionUtil.createRabbitConnection();
         // 创建通道
         Channel channel = conn.createChannel();
@@ -46,7 +46,7 @@ public class HelloWorld {
         };
         // 创建订阅器，并接受消息, 自动ack, 设置消费者
         channel.basicConsume(QUEUE_NAME, true, consumer);
-        System.in.read();
+        Thread.sleep(10000);
     }
 
 

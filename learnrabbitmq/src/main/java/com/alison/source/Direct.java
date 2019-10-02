@@ -46,12 +46,14 @@ public class Direct {
         }
 
         Consumer consumer = new DefaultConsumer(channel) {
+            //
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
                 String message = new String(body, "UTF-8");
                 System.out.println(" 接收到信息:. '" + envelope.getRoutingKey() + "':'" + message + "'");
             }
         };
+//        第一个参数是队列的名字；第二个参数表示是否自动确认消息的接收情况，我们使用true，自动确认；第三个参数需要传入一个实现了Consumer接口的对象，
         channel.basicConsume(queueName, true, consumer);
         System.in.read();
     }

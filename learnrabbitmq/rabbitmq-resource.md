@@ -9,3 +9,6 @@
 
 
 
+-   [RabbitMQ基础使用](https://cloud.tencent.com/developer/article/1469326)
+
+
