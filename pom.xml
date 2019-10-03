@@ -19,5 +19,6 @@
         <module>learnnetty</module>
         <module>learnrabbitmq</module>
         <module>simpleboot</module>
+        <module>thread</module>
     </modules>
 </project>
