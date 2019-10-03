@@ -11,8 +11,14 @@
 ![RabbitMQ](http://icdn.apigo.cn/blog/rabbit-producer.gif)
 ![Broker](http://icdn.apigo.cn/blog/rabbitmq-flow3.png)
 
-
-
+## 内容
+1. Hello World入门实战
+2. 工作队列轮询分发和公平分发
+3. Publish/Subscribe（发布/订阅模式）
+4. Routing（路由模式）
+5. Topic（主题模式
+6. rpc
+7. spring boot 集成 rabbitmq
 
 ## 链接
 >1. https://www.cnblogs.com/vipstone/p/9275256.html
