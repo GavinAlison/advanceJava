@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Profile;
  * @Version 1.0
  * @Description
  */
-//@Profile({"tut1", "hello-world"})
+@Profile({"tut1", "hello-world"})
 @Configuration
 public class Tut1Config {
 

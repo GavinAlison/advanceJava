@@ -10,13 +10,8 @@ import java.util.concurrent.CountDownLatch;
  * @Version 1.0
  * @Description
  */
-//@RabbitListener(queues = "hello")
 @Component
 public class Tut1Receiver {
-//    @RabbitHandler
-//    public void receive(String in) {
-//        System.out.println(" [x] Received '" + in + "'");
-//    }
 
     private CountDownLatch latch = new CountDownLatch(1);
 
