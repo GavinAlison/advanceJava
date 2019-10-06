@@ -1,13 +1,13 @@
 spring:
-  profiles:
-    active: usage_message
+#  profiles:
+#    active: usage_message
   rabbitmq:
     host: 192.168.56.103
     port: 5672
     username: guest
     password: guest
-logging:
-  level:
-    org: ERROR
-client:
-  duration: 10000
+#logging:
+#  level:
+#    org: ERROR
+#client:
+#  duration: 30000
