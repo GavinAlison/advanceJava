@@ -1,8 +1,11 @@
 package com.alison.springboot.tut2;
 
 import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
  * @Author alison
@@ -11,11 +14,17 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  * @Description
  */
 public class Producer {
-    public static void main(String[] args) {
-        ApplicationContext context = new AnnotationConfigApplicationContext(HelloWorldConfiguration.class);
-        AmqpTemplate amqpTemplate = context.getBean(AmqpTemplate.class);
-        amqpTemplate.convertAndSend("Hello World");
+
+
+    public static void main(String[] args) throws Exception {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(HelloWorldConfiguration.class);
+        context.getEnvironment().setActiveProfiles("tut2");
+        context.refresh();
+
+        RabbitTemplate rabbitTemplate = context.getBean(RabbitTemplate.class);
+        rabbitTemplate.convertAndSend("Hello World");
         System.out.println("send: Hello World");
+        System.in.read();
     }
 
 }

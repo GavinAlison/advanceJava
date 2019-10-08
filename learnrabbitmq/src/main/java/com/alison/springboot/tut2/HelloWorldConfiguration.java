@@ -1,6 +1,8 @@
 package com.alison.springboot.tut2;
 
-import org.springframework.amqp.core.AmqpAdmin;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -30,10 +32,10 @@ public class HelloWorldConfiguration {
         return connectionFactory;
     }
 
-    @Bean
-    public AmqpAdmin amqpAdmin() {
-        return new RabbitAdmin(connectionFactory());
-    }
+//    @Bean
+//    public RabbitAdmin amqpAdmin() {
+//        return new RabbitAdmin(connectionFactory());
+//    }
 
     @Bean
     public RabbitTemplate rabbitTemplate() {
@@ -51,11 +53,10 @@ public class HelloWorldConfiguration {
         return new Queue(this.helloWorldQueueName);
     }
 
-/*
-	@Bean
-	public Binding binding() {
-		return declare(new Binding(helloWorldQueue(), defaultDirectExchange()));
-	}*/
+    @Bean
+    public Binding binding() {
+        return BindingBuilder.bind(helloWorldQueue()).to(new DirectExchange(helloWorldQueueName)).with(helloWorldQueueName);
+    }
 
 	/*
 	@Bean
