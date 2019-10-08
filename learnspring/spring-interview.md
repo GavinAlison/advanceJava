@@ -1,5 +1,64 @@
 > 上知乎查询一个问题“spring 的面试题”，收到下面这些方面
 
+# 目录
+-   1.1. 不同版本的 Spring Framework 有哪些主要功能？
+-   1.2. 什么是 Spring Framework 
+-   1.3. 列举 Spring Framework 的优点。
+-   1.4  Spring Framework 有哪些不同的功能？
+-   1.5  Spring Framework 中有多少个模块，它们分别是什么 
+-   1.6  什么是 Spring 配置文件 
+-   1.7. Spring 应用程序有哪些不同组件 
+-   1.8. 使用 Spring 有哪些方式
+-   2、依赖注入（Ioc）
+-   2.1. 什么是 Spring IOC 容器 
+-   2.2. 什么是依赖注入 
+-   2.3. 可以通过多少种方式完成依赖注入
+-   2.4. 区分构造函数注入和 setter 注入
+-   2.5. spring 中有多少种 IOC 容器
+-   2.6. 区分 BeanFactory 和 ApplicationContext
+-   2.7. 列举 IoC 的一些好处
+-   2.8. Spring IoC 的实现机制
+-   3. Beans
+-   3.1. 什么是 spring bean
+-   3.2. spring 提供了哪些配置方式
+-   3.3. spring 支持集中 bean scope
+-   3.4. spring bean 容器的生命周期是什么样的
+-   3.5. 什么是 spring 的内部 bean
+-   3.6. 什么是 spring 装配
+-   3.7. 自动装配有哪些方式
+-   3.8. 自动装配有什么局限
+-   4、注解
+-   4.1. 什么是基于注解的容器配置
+-   4.2. 如何在 spring 中启动注解装配
+-   4.3. @Component, @Controller, @Repository, @Service 有何区别
+-   4.4. @Required 注解有什么用
+-   4.6. @Qualifier 注解有什么用
+-   4.7. @RequestMapping 注解有什么用
+-   5、数据访问
+-   5.1. spring DAO 有什么用
+-   5.2. 列举 Spring DAO 抛出的异常
+-   5.3. spring JDBC API 中存在哪些类
+-   5.4. 使用 Spring 访问 Hibernate 的方法有哪些
+-   5.5. 列举 spring 支持的事务管理类型
+-   5.6. spring 支持哪些 ORM 框架
+-   6、AOP
+-   6.1. 什么是 AOP
+-   6.2. 什么是 Aspect
+-   6.3. 什么是切点（JoinPoint）
+-   6.4. 什么是通知（Advice）
+-   6.5. 有哪些类型的通知（Advice）
+-   6.6. 指出在 spring aop 中 concern 和 cross-cutting concern 的不同之处
+-   6.7. AOP 有哪些实现方式
+-   6.8. Spring AOP and AspectJ AOP 有什么区别
+-   6.9. 如何理解 Spring 中的代理
+-   6.10. 什么是编织（Weaving）
+-   7.MVC
+-   7.1. Spring MVC 框架有什么用
+-   7.2. 描述一下 DispatcherServlet 的工作流程
+-   7.3. 介绍一下 WebApplicationContext
+
+
+
 Spring Framework 现在几乎已成为 Java Web 开发的标配框架。
 那么，作为 Java 程序员，你对 Spring 的主要技术点又掌握了多少呢？不妨用本文的问题来检测一下。
 ## 1、一般问题
