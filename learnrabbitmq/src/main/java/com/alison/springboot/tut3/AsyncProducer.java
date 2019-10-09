@@ -10,7 +10,10 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  */
 public class AsyncProducer {
     public static void main(String[] args) throws Exception {
-        new AnnotationConfigApplicationContext(ProducerConfiguration.class).getEnvironment().setActiveProfiles("tut3");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.getEnvironment().setActiveProfiles("tut3");
+        context.register(ProducerConfiguration.class);
+        context.refresh();
     }
 
 }

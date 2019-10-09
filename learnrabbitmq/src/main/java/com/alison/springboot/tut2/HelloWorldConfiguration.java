@@ -1,12 +1,8 @@
 package com.alison.springboot.tut2;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,18 +28,12 @@ public class HelloWorldConfiguration {
         return connectionFactory;
     }
 
-//    @Bean
-//    public RabbitAdmin amqpAdmin() {
-//        return new RabbitAdmin(connectionFactory());
-//    }
-
     @Bean
     public RabbitTemplate rabbitTemplate() {
         RabbitTemplate template = new RabbitTemplate(connectionFactory());
         //The routing key is set to the name of the queue by the broker for the default exchange.
         template.setRoutingKey(this.helloWorldQueueName);
-        //Where we will synchronously receive messages from
-//        template.setDefaultReceiveQueue(this.helloWorldQueueName);
+        template.setQueue(this.helloWorldQueueName);
         return template;
     }
 
@@ -53,10 +43,6 @@ public class HelloWorldConfiguration {
         return new Queue(this.helloWorldQueueName);
     }
 
-    @Bean
-    public Binding binding() {
-        return BindingBuilder.bind(helloWorldQueue()).to(new DirectExchange(helloWorldQueueName)).with(helloWorldQueueName);
-    }
 
 	/*
 	@Bean

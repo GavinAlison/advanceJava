@@ -24,6 +24,7 @@ public class ConsumerConfiguration extends HelloWorldConfiguration {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
         container.setConnectionFactory(connectionFactory());
         container.setQueueNames(this.helloWorldQueueName);
+        // 不断监听queue，然后处理消息
         container.setMessageListener(new MessageListenerAdapter(new HelloWorldHandler(), "handleMessage"));
         return container;
     }

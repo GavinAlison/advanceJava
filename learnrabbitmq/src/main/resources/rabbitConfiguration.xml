@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:rabbit="http://www.springframework.org/schema/rabbit"
-       xsi:schemaLocation="http://www.springframework.org/schema/rabbit https://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+       xsi:schemaLocation="http://www.springframework.org/schema/rabbit
+        https://www.springframework.org/schema/rabbit/spring-rabbit.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- 注意加入spring-rabbit.xsd-->
     <!--    构建工厂-->
-    <rabbit:connection-factory id="connectionFactory"/>
+    <rabbit:connection-factory id="connectionFactory" host="192.168.56.103" port="5672" connection-timeout="10000"/>
     <!-- 给admin 配置connect factory-->
     <rabbit:admin connection-factory="connectionFactory"/>
 

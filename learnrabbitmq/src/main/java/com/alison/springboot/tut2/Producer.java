@@ -17,14 +17,16 @@ public class Producer {
 
 
     public static void main(String[] args) throws Exception {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(HelloWorldConfiguration.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.getEnvironment().setActiveProfiles("tut2");
+        context.register(HelloWorldConfiguration.class);
         context.refresh();
 
         RabbitTemplate rabbitTemplate = context.getBean(RabbitTemplate.class);
+        // send once
         rabbitTemplate.convertAndSend("Hello World");
         System.out.println("send: Hello World");
-        System.in.read();
+        Thread.sleep(10000);
     }
 
 }

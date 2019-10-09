@@ -10,4 +10,6 @@ spring:
 #  level:
 #    org: ERROR
 #client:
+logging:
+  config: classpath:log4j2.xml
 #  duration: 30000
