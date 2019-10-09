@@ -42,7 +42,6 @@ Sort this file by hand using Heapsort and answer the following questions:
 
 
 
-
 (4) [25 pts.] Use Quicksort as shown in class and sort the following file by hand and selecting the first element as the split element:
 
 72,20,73,42,11,80,39,30,100,46,88,32,21
