@@ -2,7 +2,7 @@
 -   spring 如何解决循环依赖 
 -   讲讲Spring加载流程 
 -   spring利用了java的什么特性
-
+-   annotationApplicationContext的作用
 
 ## 1. spring 如何解决循环依赖？
 ### 1.1 何为循环依赖？
@@ -90,3 +90,6 @@ Spring中提供了许多的类型转换器
 
 ## spring利用了java的什么特性
 Java 的字节码、反射、注解、包扫描等机制支撑了 Spring 全家桶能够实现 AOP 开发、依赖注入、声明式事务、模块自动化加载等核心特性
+
+## AnnotationApplicationContext的作用
+使用它可以实现基于Java的配置类的应用上下文， 避免使用application.xml进行配置
