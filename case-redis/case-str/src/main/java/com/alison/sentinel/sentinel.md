@@ -88,7 +88,9 @@ down-after-milliseconds 选项所指定的值， 则这个实例会被 Sentinel�
 
 3. 如果一个 Master 主服务器被标记为主观下线（SDOWN），则正在监视这个 Master 
 主服务器的所有 Sentinel（哨兵）进程要以每秒一次的频率确认 Master 主服务器的确进入了
-主观下线状态。4. 当有足够数量的 Sentinel（哨兵）进程（大于等于配置文件指定的值）
+主观下线状态。
+
+4. 当有足够数量的 Sentinel（哨兵）进程（大于等于配置文件指定的值）
 在指定的时间范围内确认 Master 主服务器进入了主观下线状态（SDOWN）， 
 则 Master 主服务器会被标记为客观下线（ODOWN）。
 
