@@ -19,3 +19,6 @@
 -   RedisLockRegistry
 > spring-integration-redis 提供， 原理，通过本地锁 + redis锁 双重锁机制。
 > 
+
+
+https://www.zhihu.com/search?type=content&q=Redisson%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%20%E9%9C%80%E8%A6%81%E9%87%8A%E6%94%BE%E5%90%97
