@@ -12,3 +12,14 @@
 
 
 
+## redis的分布式锁如何设置
+>[曾奇：谈谈我所认识的分布式锁](ttps://juejin.im/post/5cd01e5ce51d456e537ef3be#heading-10)
+
+-   朴素redis
+> setnx + delete
+> setnx + setex
+-   ZooKeeper
+>利用 顺序临时节点和Watch机制
+-   Redisson
+> Redisson 架设在 redis 基础上的 Java 驻内存数据网格（In-Memory Data Grid），基于NIO的 Netty 框架上，利用了 redis 键值数据库。功能非常强大，解决了很多分布式架构中的问题。
+
