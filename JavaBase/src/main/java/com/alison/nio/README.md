@@ -1,6 +1,9 @@
 # NIO
 同步、非阻塞
 
+## keyword
+channel, buffer, selector
+
 ## menu
 1. Channel and Buffer
 2. Scatter and Gather
@@ -46,6 +49,8 @@ http://wiki.jikexueyuan.com/project/java-nio/nio-io.html
 selector 是多路复用器， 普通的io, 通过socket -->I/O, 每次都需要一个线程；     
 selector 的模式， socket-->channel --> selector ---> I/O, 一个selector需要一个线程，     
 多个socket 有多个channel , 所以说单个线程可以监听多个数据通道     
+
+
 
 
 ## 参考链接

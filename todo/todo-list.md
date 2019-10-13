@@ -1,4 +1,11 @@
 ## TODO-LIST
+-   netty
+-   reactor
+-   proactor
+-   dubbo
+
+
+
 -   Hadoop
 -   Hbase
 -   Hive
@@ -16,4 +23,3 @@
 -   OCR
 -   Netty-reactor
 -   Spring boot WebFlux
--   

@@ -114,6 +114,7 @@ public class Server{
                 return;
             }
             //5 有数据则进行读取 读取之前需要进行复位方法(把position 和limit进行复位)
+            // position = 0， limit = 写入的数据长度
             readBuf.flip();
             //6 根据缓冲区的数据长度创建相应大小的byte数组，接收缓冲区的数据
             byte[] bytes = new byte[readBuf.remaining()];
@@ -139,7 +140,7 @@ public class Server{
 
     /**
      * @param key
-     * accept事件
+     * accept事件 ， 注册事件
      */
     private void accept(SelectionKey key) {
         try {

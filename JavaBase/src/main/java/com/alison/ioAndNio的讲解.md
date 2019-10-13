@@ -113,6 +113,33 @@ HttpURLConnection 也归类到同步阻塞 IO 类库，因为网络通信同样�
 ### NIO 编程
 ![NIO 编程](http://dl2.iteye.com/upload/attachment/0095/0309/21c0d590-0547-386e-ab24-ce1cf7bf3283.png)
 
+### 操作系统抽象
+-   CPU--->进程
+-   磁盘，网络，文件--> I/O
+-   内存 --> 内存
+
+### 内存分配
+-   操作系统将内存分为 内核内存和 用户内存
+-   一般I/O 操作，就是将 数据从网络中读取到 内核
+
+### linux 中的IO 通信机制
+-   同步模型（synchronous IO）
+    -   阻塞IO（bloking IO）  
+    -   非阻塞IO（non-blocking IO） NIO
+    -   多路复用IO（multiplexing IO） 
+    -   信号驱动式IO（signal-driven IO）
+-   异步IO（asynchronous IO）
+    -   异步IO
+
+
+
+### linux中select/poll/epoll/pselect
+
+I/O, 一般流转：   网络文件---> 内核空间 ---> 用户空间 ---> 就进行
+
+
+    
+    
 
 链接：
 > [IO读写——同步、异步与阻塞、非阻塞之间的区别](https://blog.csdn.net/caisongcheng_good/article/details/80241617)
@@ -120,4 +147,4 @@ HttpURLConnection 也归类到同步阻塞 IO 类库，因为网络通信同样�
 > [5种IO模型、阻塞IO和非阻塞IO、同步IO和异步IO](https://www.zhihu.com/search?type=content&q=同步异步阻塞非阻塞及五种io)
 > [java IO、NIO、AIO详解](https://www.cnblogs.com/sxkgeek/p/9488703.html)
 > [java aio和nio的区别](https://blog.csdn.net/luzhensmart/article/details/82230076)
-
+> [NIO](https://www.zhihu.com/search?type=content&q=nio)
