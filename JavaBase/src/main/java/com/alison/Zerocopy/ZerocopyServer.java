@@ -11,8 +11,6 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 
 /**
  * @Author alison
@@ -24,6 +22,8 @@ import java.nio.file.StandardOpenOption;
 public class ZerocopyServer {
 
     ServerSocketChannel listener = null;
+
+    final String fileName = "D:\\水瓶测试文件\\testdata\\1.xlsx";
 
     protected void myStartup() {
         InetSocketAddress listenAddr = new InetSocketAddress(9026);
@@ -49,49 +49,53 @@ public class ZerocopyServer {
 
     private void readData() {
         ByteBuffer dst = ByteBuffer.allocate(4096);
-
-
+        FileChannel outChannel = null;
+        FileOutputStream outputStream = null;
+        File destFile = new File(fileName);
         try {
-            while (true) {
-                try (
-                        File destFile = new File("E:/destination/3.doc");
-//                        if(!destFile.exists()) {
-//                    destFile.createNewFile();
-//                }
-                FileOutputStream outputStream = new FileOutputStream(destFile);
-                // 需要append, 追加模式
-                FileChannel outChannel = FileChannel.open(Paths.get("E:/destination/2.doc"),
-                        StandardOpenOption.WRITE, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
-                ){
-                    outChannel = outputStream.getChannel();
-                    SocketChannel conn = listener.accept();
-                    log.info("创建的连接: " + conn);
-                    conn.configureBlocking(true);
-                    int nread = 0;
-
-
-                    while (nread != -1) {
-                        try {
-                            // 每次读取的数值长度
-                            nread = conn.read(dst);
+            if (!destFile.exists()) {
+                destFile.createNewFile();
+            }
+            outputStream = new FileOutputStream(destFile);
+            // 需要append, 追加模式
+//                outChannel = FileChannel.open(Paths.get(fileName),
+//                        StandardOpenOption.WRITE, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            outChannel = outputStream.getChannel();
+            SocketChannel conn = listener.accept();
+            log.info("创建的连接: " + conn);
+            conn.configureBlocking(true);
+            int nread = 0;
+            while (nread != -1) {
+                try {
+                    // 每次读取的数值长度
+                    nread = conn.read(dst);
 //                        log.info(""+nread);
-                            dst.flip();
-                            outChannel.write(dst);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            nread = -1;
-                        }
-                        dst.clear();
-//                    dst.rewind();
-                    }
-                    log.info("over");
-                }catch(Exception ex){
-                    ex.printStackTrace();
+                    dst.flip();
+                    outChannel.write(dst);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    nread = -1;
+                }
+                dst.clear();
+            }
+            log.info("over");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (outputStream != null) {
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            if (outChannel != null) {
+                try {
+                    outChannel.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-
     }
 }

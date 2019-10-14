@@ -18,6 +18,9 @@ import java.nio.channels.SocketChannel;
  */
 @Slf4j
 public class ZerocopyClient {
+
+    private final String fileName = "D:\\水瓶测试文件\\testdata\\test02.xlsx";
+
     public static void main(String[] args) throws IOException {
         ZerocopyClient sfc = new ZerocopyClient();
         sfc.testSendfile();
@@ -31,8 +34,7 @@ public class ZerocopyClient {
         sc.connect(sad);
         sc.configureBlocking(true);
 
-        String fname = "E:\\destination\\1.doc";
-        FileChannel fc = new FileInputStream(fname).getChannel();
+        FileChannel fc = new FileInputStream(fileName).getChannel();
         long start = System.nanoTime();
         long nsent = 0, curnset = 0;
         curnset = fc.transferTo(0, fc.size(), sc);
