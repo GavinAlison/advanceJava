@@ -16,9 +16,14 @@
 -   Redisson
 > Redisson 架设在 redis 基础上的 Java 驻内存数据网格（In-Memory Data Grid），基于NIO的 Netty 框架上，利用了 redis 键值数据库。功能非常强大，解决了很多分布式架构中的问题。
 > Redission通过Netty Future机制、Semaphore （jdk信号量）、redis锁实现。
+> trylock 意思就是尝试获取锁，获取不到就说明别人没有获取到锁，然后就可以加锁了
+
 -   RedisLockRegistry
 > spring-integration-redis 提供， 原理，通过本地锁 + redis锁 双重锁机制。
-> 
+
+-   RedLock
+
+
 
 ## FAQ
 1.  分布锁出现`ERR Error running script (call to f_9401052d872adfd0179ef8c8e8c028512707629a): @user_script:1: WR`问题
