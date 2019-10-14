@@ -17,6 +17,7 @@ import java.nio.channels.SocketChannel;
  * @Date 2019/10/13  22:16
  * @Version 1.0
  * @Description disk-nic零拷贝
+ * @link https://www.cnblogs.com/z-sm/p/6547709.html
  */
 @Slf4j
 public class ZerocopyServer {
