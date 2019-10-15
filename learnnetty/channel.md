@@ -27,7 +27,6 @@ EventLoop 用于处理 Channel 的 I/O 操作。一个单一的 EventLoop通常�
 ## channelfuture
 Netty 所有的 I/O 操作都是异步。因为一个操作可能无法立即返回，我们需要有一种方法在以后确定它的结果。出于这个目的，Netty 提供了接口 ChannelFuture,它的 addListener 方法注册了一个 ChannelFutureListener ，当操作完成时，可以被通知（不管成功与否）。
 
-##  
 
 
 
