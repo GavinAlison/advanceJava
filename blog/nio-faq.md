@@ -181,8 +181,18 @@ Epoll ：事件驱动不阻塞，mmap实现内核与用户空间的消息传递�
 ### 实现
 java.nio.channel.FileChannel的transferTo()，transferFrom()
 
+### 例子
+-   disk-nic零拷贝
+-   disk-disk零拷贝
 
-
+### NIO 带来了些什么
+-   事件驱动模型
+-   避免多线程
+-   单线程处理多任务
+-   非阻塞I/O，I/O读写不再阻塞，而是返回0
+-   基于block的传输，通常比基于流的传输更高效
+-   更高级的IO函数，zero-copy
+-   IO多路复用大大提高了Java网络应用的可伸缩性和实用性
 
 
 
