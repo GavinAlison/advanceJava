@@ -15,6 +15,8 @@ import java.util.Scanner;
  * @Date 2019/10/15  23:41
  * @Version 1.0
  * @Description
+ * @link https://zhuanlan.zhihu.com/p/78665014
+ * zhihu.com/search?type=content&q=netty
  */
 public class ChatClient {
     /**
