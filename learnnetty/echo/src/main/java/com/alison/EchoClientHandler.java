@@ -9,7 +9,8 @@ import io.netty.util.CharsetUtil;
 
 /**
  * 我们需要将入站的信息返回给发送者，由于 write() 是异步的，在 channelRead() 返回时，可能还没有完成。
- * 所以，我们使用 ChannelInboundHandlerAdapter,无需释放信息。最后在 channelReadComplete() 我们调用 ctxWriteAndFlush() 来释放信息。
+ * 所以，我们使用 ChannelInboundHandlerAdapter,无需释放信息。
+ * 最后在 channelReadComplete() 我们调用 ctxWriteAndFlush() 来释放信息。
  */
 @ChannelHandler.Sharable
 public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
@@ -26,7 +27,7 @@ public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
     }
 
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {                    //4 记录日志错误并关闭 channel
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {     //4 记录日志错误并关闭 channel
         cause.printStackTrace();
         ctx.close();
     }
