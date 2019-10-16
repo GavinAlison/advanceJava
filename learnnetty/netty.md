@@ -169,6 +169,54 @@ DirectMemory中可以直接通过DMA发送到网卡接口
 
 Netty中使用了FileChannel的transferTo方法，该方法依赖于操作系统实现零拷贝。
 
+## 编码和解码
+>在编写网络应用程序的时候需要注意codec（编解码器），因为数据在网络中传输的都是二进制字节吗数据，而我们拿到的目标数据往往不是字节吗数据。因此在发送数据时就需要编码，接收数据时需要解码。
+ codec的组成部分有两个 ：decoder（解码器）和encoder（编码器）。encoder负责把业务数据转换成字节码数据，decoder负责把字节码数据转换成业务数据。
+ 
+### 其实java的序列化技术就可以作为codec去使用，但是它的硬伤太多 
+```
+无法跨语言，这应该是Java序列化最致命的问题了。
+序列化后体积太大，是二进制编码的5倍多。
+序列化性能太低。
+由于Java序列化硬伤太多，因此Netty自身提供了一些codec，如下所示 ：
+Netty提供的解码器 ：
+StringDecoder，对字符串数据解码
+ObjectDecoder，对Java对象进行解码
+Netty提供的解码器：
+StringEncoder,对字符串数据进行编码
+ObjectEncoder，对Java对象进行编码
+Netty自带的ObjectDecoder和ObjectEncoder可以用来实现POJO对象或各种业务对象的编码和解码，但其内部使用的仍是Java序列化技术，所以不建议使用。
+```
+
+### Google的Protobuf
+>Protobuf是Google发布的开源项目，全称Google Protocol Buffers，特定如下 ：
+```
+支持跨平台、多语言（支持目前绝大多数语言，例如C++、C#、Java、Python等）
+高性能，高可靠性
+使用protobuf编译器能自动生成代码，Protpbuf是将类的定义使用.protp文件进行描述，然后通过protoc.exe编译器根据.proto自动生成.java文件
+```
+目前在使用Netty开发时，经常会结合Protobuf作为codec（编解码器）去使用  
+
+## 自定义RPC
+>RPC（Remote Procedure Call），即远程过程调用，它是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络实现的技术。常见的RPC框架有 ：Dubbo，Grpc。
+```
+服务消费房（client）以本地调用方式调用服务
+client stub 接收到调用后负责将方法、参数等封装成能够进行传输的消息体
+client stub 将消息进行编码并发送到服务端
+server stub 收到消息后进行解码
+server stub 根据解码结果调用本地的服务
+本地服务执行并将结果返回给server stub
+server stub将返回导入结果进行编码并发送至消费方
+client stub接收到消息并进行解码
+服务消费方（client）得到结果
+```
+RPC的目标就是将2-8这些步骤都封装起来，用户无需关系这些细节，可以像调用本地方法一样即可完成远程服务调用。
+
+
+
+
+
+
 
 > link: https://www.zhihu.com/search?type=content&q=netty
 > link: https://juejin.im/post/5c97ae12e51d45580b681b0b#heading-1
