@@ -85,7 +85,7 @@ public class NettyClient {
                 // 本次重连的间隔
                 int delay = 1 << order;
                 log.error("{} : 连接失败，第 {} 重连....", new Date(), order);
-                bootstrap.group().schedule(() -> connect(bootstrap, host, port, retry - 1), delay, TimeUnit.SECONDS);
+                bootstrap.config().group().schedule(() -> connect(bootstrap, host, port, retry - 1), delay, TimeUnit.SECONDS);
             }
         });
         channel = channelFuture.channel();

@@ -3,6 +3,7 @@ package com.alison.rpc2.client;
 import com.alison.rpc2.common.DefaultFuture;
 import com.alison.rpc2.protocol.RpcRequest;
 import com.alison.rpc2.protocol.RpcResponse;
+import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
@@ -10,8 +11,8 @@ import io.netty.channel.ChannelPromise;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-//  数据的处理重点在于ClientHandler类上，它继承了ChannelHandlerAdapter类，可以对出站和入站的数据进行处理
-public class ClientHandler extends ChannelHandlerAdapter {
+//  数据的处理重点在于ClientHandler类上，它继承了ChannelDuplexHandler类，可以对出站和入站的数据进行处理
+public class ClientHandler extends ChannelDuplexHandler {
     /**
      * 使用Map维护请求对象ID与响应结果Future的映射关系
      * 目的是为了客户端用来验证服务端响应是否与请求相匹配，因为Netty的channel可能被多个线程使用，

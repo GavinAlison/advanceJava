@@ -15,7 +15,7 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
-            <version>LATEST</version>
+            <version>4.1.42.Final</version>
         </dependency>
         <dependency>
             <groupId>com.google.protobuf</groupId>
@@ -43,11 +43,6 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.9.10</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

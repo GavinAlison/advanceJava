@@ -16,10 +16,14 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PreDestroy;
 import javax.imageio.spi.ServiceRegistry;
 
+@Profile("server")
+@Component
 @Slf4j
 public class NettyServer implements InitializingBean {
     private EventLoopGroup boss = null;
@@ -32,6 +36,7 @@ public class NettyServer implements InitializingBean {
         //此处使用了zookeeper做注册中心，本文不涉及，可忽略
 //        ServiceRegistry registry = new ZkServiceRegistry("127.0.0.1:2181");
 //        start(registry);
+        start(null);
     }
 
     public void start(ServiceRegistry registry) throws Exception {

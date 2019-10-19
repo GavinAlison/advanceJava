@@ -11,10 +11,12 @@ import org.springframework.cglib.reflect.FastClass;
 import org.springframework.cglib.reflect.FastMethod;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.InvocationTargetException;
 
+@Profile("server")
 @Component
 @Slf4j
 @ChannelHandler.Sharable
@@ -23,7 +25,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<RpcRequest> imple
     private ApplicationContext applicationContext;
 
     @Override
-    protected void messageReceived(ChannelHandlerContext ctx, RpcRequest msg) {
+    protected void channelRead0(ChannelHandlerContext ctx, RpcRequest msg) {
         RpcResponse rpcResponse = new RpcResponse();
         rpcResponse.setRequestId(msg.getRequestId());
         try {

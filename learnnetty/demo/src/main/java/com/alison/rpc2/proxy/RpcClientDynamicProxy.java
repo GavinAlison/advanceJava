@@ -1,4 +1,4 @@
-package com.alison.rpc2;
+package com.alison.rpc2.proxy;
 
 import com.alison.rpc2.client.NettyClient;
 import com.alison.rpc2.protocol.RpcRequest;
@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.UUID;
 
+// 客户端使用Java动态代理，在代理类中实现通信细节，众所众知，Java动态代理需要实现InvocationHandler接口
 @Slf4j
 public class RpcClientDynamicProxy<T> implements InvocationHandler {
     private Class<T> clazz;
