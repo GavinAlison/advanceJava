@@ -8,9 +8,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>demo1</artifactId>
+    <artifactId>cloud-service1</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>demo1</name>
+    <name>cloud-service1</name>
 
     <dependencies>
         <dependency>

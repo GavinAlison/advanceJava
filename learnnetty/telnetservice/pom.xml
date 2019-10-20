@@ -11,7 +11,7 @@
 
     <groupId>telnetservice</groupId>
     <artifactId>telnetservice</artifactId>
-
+    <name>telnetservice</name>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>

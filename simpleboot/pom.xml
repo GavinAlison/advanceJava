@@ -48,7 +48,7 @@
     <modules>
         <module>registry</module>
         <module>config</module>
-        <module>demo1</module>
+        <module>cloud-service1</module>
     </modules>
 
 

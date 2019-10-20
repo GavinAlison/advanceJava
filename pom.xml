@@ -23,7 +23,7 @@
         <module>learnspring</module>
         <module>learnSecurity</module>
         <module>learnehcache</module>
-        <module>learnmybatisperson</module>
+        <module>learnmybatis</module>
         <module>learnmybatis</module>
     </modules>
     <build>
