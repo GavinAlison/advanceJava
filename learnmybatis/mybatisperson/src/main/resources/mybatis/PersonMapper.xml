@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- namespace属性是名称空间，必须唯一 -->
+<mapper namespace="com.alison.mybatis.dao.PersonMapper">
+
+    <!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+    <!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+    <!--
+        resultMap标签:映射实体与表
+        type属性：表示实体全路径名
+        id属性：为实体与表的映射取一个任意的唯一的名字
+   -->
+    
+    <resultMap id="BaseResultMap" type="com.alison.mybatis.bean.Person">
+        <!-- id标签:映射主键属性
+             result标签：映射非主键属性
+             property属性:实体的属性名
+             column属性：表的字段名
+        -->
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="gender" property="gender" jdbcType="VARCHAR"/>
+        <result column="dept_id" property="deptId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="insertColum">
+      username, email, gender, dept_id
+    </sql>
+    <!--//在JDBC中我们通常使用?号作为占位符，而在Mybatis中，我们是使用#{}作为占位符, ibatis中使用##-->
+    <!--//parameterType我们指定了传入参数的类型-->
+    <!--//#{}实际上就是调用了Person属性的get方法-->
+    <insert id="addPerson" parameterType="Person">
+        -- selectKey将主键返回，需要再返回
+        -- 添加selectKey实现将主键返回
+        -- keyProperty:返回的主键存储在pojo中的哪个属性
+        -- order：selectKey的执行顺序，是相对与insert语句来说，由于mysql的自增原理执行完insert语句之后才将主键生成，所以这里selectKey的执行顺序为after
+        -- resultType:返回的主键是什么类型
+        -- LAST_INSERT_ID():是mysql的函数，返回auto_increment自增列新记录id值。
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into person(username,email,gender) VALUES (#{username},#{email},#{gender})
+    </insert>
+
+    <select id="getAllPersons" resultType="person">
+     SELECT  * from person
+    </select>
+    <!--通过select执行数据库查询
+            id:标识映射文件中的sql
+            将sql语句封装到mappedStatement对象中，所以id称为Statement的id
+            #{}：表示占位符
+            #{id}：其中的id表示接收输入的参数，参数名称就是id，如果输入参数是简单类型，那么#{}中的参数名可以任意，可以是value或者其他名称
+            parameterType：表示指定输入参数的类型
+            resultType：表示指定sql输出结果的所映射的java对象类型
+     -->
+    <!-- 根据id获取用户信息 -->
+    <select id="findPersonById" parameterType="int" resultType="com.alison.mybatis.bean.Person">
+        select * from person where id = #{id}
+    </select>
+    <!-- 自定义条件查询用户列表
+	resultType：指定就是单条记录所映射的java对象类型
+    ${}:表示拼接sql串，将接收到的参数内容不加修饰的拼接在sql中
+    使用${}拼接sql，会引起sql注入
+    ${value}：接收输入参数的内容，如果传入类型是简单类型，${}中只能够使用value
+    -->
+    <select id="findPersonByUsername" parameterType="java.lang.String" resultType="com.alison.mybatis.bean.Person">
+        select * from person where username like '%${value}%'
+    </select>
+
+    <!--<insert id="addPersons">
+      insert into person(username,email,gender) VALUES
+      <foreach collection="persons" item="person" separator=",">
+        (#{person.username},#{person.email},#{person.gender})
+      </foreach>
+    </insert>-->
+    <!-- <insert id="addPersons">
+       <foreach collection="persons" item="person" separator=";">
+          insert into person(username,email,gender) VALUES
+         (#{person.username},#{person.email},#{person.gender})
+        </foreach>
+     </insert>-->
+    <!-- insert into person(username,email,gender) VALUES("zhangsan","zhangsan@163.com","F"),("lisi","lisi@163.com","F")
+     insert into person(username,email,gender) VALUES("tom","zhangsan@163.com","F");
+     insert into person(username,email,gender) VALUES("jerry","lisi@163.com","F")-->
+    <select id="getPersonsByIds" resultType="person">
+        select * from person where id in
+        <foreach collection="array" item="id" index="i" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+    <select id="getPersonByCollection" resultType="person">
+    select * from person where id=#{test[0]}
+    </select>
+    <!-- 根据多参数进行数据的查询-->
+    <select id="getPersonByNameAndGender" resultType="person">
+    select * from person where username=#{username} and gender=#{param2}
+    </select>
+    <!-- 根据id删除数据-->
+    <delete id="deletePerson" parameterType="int">
+      delete from person where id=#{parameter1}
+    </delete>
+    <!-- 更新用户-->
+    <update id="updatePerson" parameterType="int">
+        update person set email = "hehe@qq.com" where id = #{id}
+    </update>
+
+</mapper>

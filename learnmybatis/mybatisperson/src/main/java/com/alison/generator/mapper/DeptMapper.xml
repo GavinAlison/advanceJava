@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.alison.generator.dao.DeptMapper" >
+  <resultMap id="BaseResultMap" type="com.alison.generator.model.Dept" >
+    <constructor >
+      <arg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="deptNo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="deptName" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.alison.generator.model.Dept" >
+    insert into dept (id, deptNo, deptName
+      )
+    values (#{id,jdbcType=INTEGER}, #{deptno,jdbcType=VARCHAR}, #{deptname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.alison.generator.model.Dept" >
+    insert into dept
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="deptno != null" >
+        deptNo,
+      </if>
+      <if test="deptname != null" >
+        deptName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="deptno != null" >
+        #{deptno,jdbcType=VARCHAR},
+      </if>
+      <if test="deptname != null" >
+        #{deptname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

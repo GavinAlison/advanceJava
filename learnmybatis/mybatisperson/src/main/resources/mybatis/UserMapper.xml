@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.alison.mybatis.dao.UserMapper">
+
+    <!-- 开启本mapper的namespace下的二缓存
+	type：指定cache接口的实现类的类型，mybatis默认使用PerpetualCache
+	要和ehcache整合，需要配置type为ehcache实现cache接口的类型
+	 -->
+    <!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+    <!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+
+    <!--定义 resultMap
+    将select id id_, username username_ from user where id = #{value} 和WS_User类中的属性做一个映射关系
+    type: resultMap最终映射的java对象类型
+    id:对resultMap的唯一标识
+    -->
+    <resultMap id="userResultMap" type="com.alison.mybatis.bean.User">
+        <!--id表示查询结果中的唯一标识
+        column：查询出来的列名
+        property：type指定pojo的属性名
+        最终resultMap对column和property做一个映射关系（对应关系）
+        -->
+        <id column="_id" property="id"/>
+        <!--result: 对普通结果映射定义
+        column：查询出来的列名
+        property：type指定pojo的属性名
+        最终resultMap对column和property做一个映射关系（对应关系）
+        -->
+        <result column="_username" property="username"/>
+        <result column="_sex" property="sex"/>
+    </resultMap>
+    <!--用户信息综合查询
+    #{userCustom.sex} :取出pojo包装对象中的性别值
+    #{userCustom.username} :取出pojo包装对象中的用户名称
+    -->
+    <select id="findUserList" parameterType="com.alison.mybatis.vo.UserQueryVo"
+            resultType="com.alison.mybatis.vo.UserCustom">
+        select * from ws_user a where a.sex = #{userCustom.sex} and a.username like  '%${userCustom.username}%'
+    </select>
+    <!--用户信息综合查询总数
+    parameterType:指定输入的类型和findUserList一样
+    resultType:输出结果类型为 int
+    -->
+    <select id="findUserCount" parameterType="com.alison.mybatis.vo.UserQueryVo" resultType="int">
+        select count(*) from ws_user a  where a.sex = #{userCustom.sex} and a.username like  '%${userCustom.username}%'
+    </select>
+
+    <select id="findUserById" parameterType="int" resultMap="userResultMap">
+        select id _id, username _username , sex _sex from ws_user where id = #{id}
+    </select>
+
+
+    <select id="findUserListHe" parameterType="com.alison.mybatis.vo.UserQueryVo"
+            resultType="com.alison.mybatis.vo.UserCustom">
+        select * from ws_user a
+        <!--where可以自动的去掉条件中的第一个and-->
+        <where>
+            <if test="userCustom != null">
+                <if test="userCustom.sex != null and userCustom.sex != ''">
+                    and a.sex = #{userCustom.sex}
+                </if>
+                <if test="userCustom.username != null">
+                    and a.username like '%${userCustom.username}%'
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <update id="updateUserById" parameterType="com.alison.mybatis.bean.User">
+        update ws_user a set a.username = #{username}, a.birthday =#{birthday} , sex= #{sex} , a.address =#{address} where a.id= #{id}
+    </update>
+</mapper>

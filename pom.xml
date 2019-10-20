@@ -21,6 +21,10 @@
         <module>simpleboot</module>
         <module>thread</module>
         <module>learnspring</module>
+        <module>learnSecurity</module>
+        <module>learnehcache</module>
+        <module>learnmybatisperson</module>
+        <module>learnmybatis</module>
     </modules>
     <build>
         <plugins>
