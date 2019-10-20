@@ -15,7 +15,7 @@
     <modules>
         <module>telnetservice</module>
         <module>echo</module>
-        <module>demo</module>
+        <module>nettyrpc</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
