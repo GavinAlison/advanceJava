@@ -1,0 +1,67 @@
+mysql 删除重复记录
+
+
+如果数据库的设计不规范，某个表没有主健，那么肯定会有重复记录的现象，或者存在这种危险。在oracle中，可以通过rowid来删除重复记录，而 mysql如何实现呢：
+1、准备基表test，待测试。
+create table test (c1 smallint,c2 smallint);
+insert into test values(1,1);
+insert into test values(1,1);
+insert into test values(1,2);
+insert into test values(2,2);
+insert into test values(2,2);
+2、创建一个临时表，结构与原表一致，但没有数据。
+create table tmp as select * from test where 1=2;
+3、将原表数据插入临时表，重复记录合为一条记录。
+insert into tmp select distinct * from test;
+4、查看一下基表和临时表的数据。
+mysql> select * from test;
++------+------+
+| c1 | c2 |
++------+------+
+| 1 | 1 |
+| 1 | 1 |
+| 1 | 2 |
+| 2 | 2 |
+| 2 | 2 |
++------+------+
+5 rows in set (0.00 sec)
+mysql> select * from tmp;
++------+------+
+| c1 | c2 |
++------+------+
+| 1 | 1 |
+| 1 | 2 |
+| 2 | 2 |
++------+------+
+3 rows in set (0.00 sec)
+5、删除基表数据
+mysql> delete from test;
+Query OK, 5 rows affected (0.02 sec)
+6、将临时表数据插回基表
+mysql> insert into test select * from tmp;
+Query OK, 3 rows affected (0.03 sec)
+Records: 3 Duplicates: 0 Warnings: 0
+7、查看一下基表的数据
+mysql> select * from test;
++------+------+
+| c1 | c2 |
++------+------+
+| 1 | 1 |
+| 1 | 2 |
+| 2 | 2 |
++------+------+
+3 rows in set (0.00 sec)
+8、数据准确，完成基表重复记录的删除。
+方法二：
+INSERT INTO "tables1" SELECT name,id FROM "tables" GROUP BY name
+借用一个中间表~ 把不复的数据先复制到中间表，再将原表删除，并且将中间表修名成现有表~ 不过INSERT INTO 表 SELECT 这种语法适合mysql4.0以上版本
+方法三：（本人经常使用的，特别表大的情况，此法算是效率比较高的了）
+新建一个临时表
+create table tmp as select * from youtable group by name
+删除原来的表
+drop table youtable
+重命名表
+alter table tmp rename youtable
+
+
+> http://community.itbbs.cn/thread/17111/page__pid__50166#entry50166

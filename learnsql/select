@@ -1,0 +1,24 @@
+select
+
+select sno, sname
+from student
+where sdept = 'math'
+
+解释: DBMS 会扫描 Student 表中的每一条记录，然后把符合 Sdept = 'nath' 条件查出来。
+
+
+select sname
+from student
+where exists 
+(
+	select 1
+	from sc 
+	where sno = student.sno
+	and cno = '1'	
+)
+
+解释:  DBMS 会扫描 Student 表中的每一条记录，然后把符合 子查询 的条件查出来。
+先取外表数据，遍历外表数据去关联内表数据，有返回则有对应的结果集。
+
+
+

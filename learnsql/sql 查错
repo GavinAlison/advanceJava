@@ -1,0 +1,20 @@
+1.查看对应sql 是否建立索引，  关键字有没有索引，是不是组合索引，
+2.sql 是否使用过索引，条件是够是or,is null , 是够遵循"最左匹配原则",
+3.查看对应的执行计划,explain
+4.查看是否将对应的sql关闭了
+
+
+
+
+
+
+后期需要买的sql书籍: 
+深入浅出SQL
+MySQL技术内幕:InnoDB存储引擎
+MySQL排错指南
+高性能 MySQL
+数据库索引设计与优化
+Effective MySQL系列
+深入MySQL源码
+MySQL Internals Manual
+MariaDB原理与实现

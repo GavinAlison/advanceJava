@@ -2,6 +2,9 @@
 
 
 ## redis的分布式锁
+redission设计的分布式锁， 关键点，
+1.  设置
+
 
 
 ## redis的问题
