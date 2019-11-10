@@ -1,1 +1,24 @@
 master-slave的流程
+
+
+
+mysql  中server-id作用
+判断事件来源哪个服务器
+
+
+数据是如何传输的，是master主动传输到slave 上，还是master在update数据时，自动写入到slave库.
+
+
+start slave
+从节点会创建一个I/O线程用来连接主节点，请求主库中更新的bin-log。
+I/O线程接收到主节点binlog dump 进程发来的更新之后，保存在本地relay-log中。
+
+
+slave数据库断开之后的情况
+整个复制过程实际上就是Slave 从Master 端获取该日志然后再在自己身上完全顺序的执行日志中所记录的各种操作。
+
+
+
+> https://www.cnblogs.com/ygqygq2/p/6045279.html
+
+

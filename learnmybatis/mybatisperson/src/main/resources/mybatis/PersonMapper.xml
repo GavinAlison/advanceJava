@@ -91,11 +91,11 @@
         </foreach>
     </select>
     <select id="getPersonByCollection" resultType="person">
-    select * from person where id=#{test[0]}
+        select * from person where id=#{test[0]}
     </select>
     <!-- 根据多参数进行数据的查询-->
     <select id="getPersonByNameAndGender" resultType="person">
-    select * from person where username=#{username} and gender=#{param2}
+        select * from person where username=#{username} and gender=#{param2}
     </select>
     <!-- 根据id删除数据-->
     <delete id="deletePerson" parameterType="int">

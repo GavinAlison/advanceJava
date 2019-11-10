@@ -32,7 +32,7 @@ public class Thread02 {
         //  给run()方法添加synchronized同步关键字。这保证了多个线程对是同一个Thread对象的run()是互斥操作的。
 //        在主线程中创建了t1,t2和t3共三个线程，它们共用一个MyThread任务对象。thread-0启动之后，
 //        一直占着"MyThread同步锁"，而一个对象有且只有一个同步锁；因此，只有thread-0在工作。
-        public synchronized  void run() {
+        public synchronized void run() {
             for (int i = 0; i < 20; i++) {
                 if (this.ticket > 0) {
                     System.out.println(Thread.currentThread().getName() + " sole: ticket=" + this.ticket--);

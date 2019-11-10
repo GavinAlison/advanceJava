@@ -2,7 +2,7 @@
 -   CRUD
 -   query
     -   term
-    -   dateage
+    -   dateage  range
     -   queryString
     -   wildcard
     -   prefix
@@ -30,3 +30,5 @@
 -   poi/searchAddress        List<PoiVO>
 -   manager/esDate/{collectTagId}       String
 -   manager/job/{jobKey}/_status        JobStatusEnum
+
+

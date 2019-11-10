@@ -25,6 +25,7 @@
         <module>learnehcache</module>
         <module>learnmybatis</module>
         <module>learnmybatis</module>
+        <module>demo</module>
     </modules>
     <build>
         <plugins>

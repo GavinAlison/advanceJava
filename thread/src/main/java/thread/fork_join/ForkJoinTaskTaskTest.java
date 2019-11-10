@@ -29,7 +29,7 @@ public class ForkJoinTaskTaskTest extends RecursiveTask<Integer> {
             }
         } else {
             // 任务大于阈值，拆分子任务
-            int middle = start + (end - start) / 2;
+            int middle = start + (end - start) >> 1;
             ForkJoinTaskTaskTest task1 = new ForkJoinTaskTaskTest(start, middle);
             ForkJoinTaskTaskTest task2 = new ForkJoinTaskTaskTest(middle + 1, end);
             //  // 执行子任务

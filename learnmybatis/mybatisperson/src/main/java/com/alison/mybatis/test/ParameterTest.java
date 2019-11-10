@@ -12,9 +12,6 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
 
-/**
- * Created by imooc
- */
 public class ParameterTest {
 
     public static SqlSessionFactory sqlSessionFactory = null;
