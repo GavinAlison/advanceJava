@@ -7,7 +7,7 @@
 -   Java 数据结构 DataStruce
 -   Java I/O 与 NIO
 -   Java 字节码ASM 
--   Java 发射
+-   Java 反射
 -   Java Annotaion
 -   Java Proxy
 -   Java 8
@@ -19,10 +19,10 @@
     -   包装类型  
     -   缓存池 
     参考-link:  
-    1. Primitive Data Types--->https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html
+    1. Primitive Data Types ---> https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html
     2. The Java® Virtual Machine Specification ---> https://docs.oracle.com/javase/specs/jvms/se8/jvms8.pdf
-    3. 包装类型 Autoboxing and Unboxing-->https://docs.oracle.com/javase/tutorial/java/data/autoboxing.html
-    4. 缓存池-->StackOverflow : Differences between new Integer(123), Integer.valueOf(123) and just 123
+    3. 包装类型 Autoboxing and Unboxing --> https://docs.oracle.com/javase/tutorial/java/data/autoboxing.html
+    4. 缓存池 --> StackOverflow : Differences between new Integer(123), Integer.valueOf(123) and just 123
 二、String
     -   概览
     -   不可变的好处

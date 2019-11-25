@@ -32,3 +32,26 @@
 -   manager/job/{jobKey}/_status        JobStatusEnum
 
 
+
+
+-	analyzed的种类与区别
+
+
+
+-	3台服务器
+-	每台有4个node， 一个node有Xmx:3g
+数据量100G, 原先用时24h, 星期5下午开始，到星期日晚上
+
+tika--> 数据库队列--> ETL --> 
+				  --> NLP --> MongoDB --> ES
+
+本机测试
+一个node， 8 shard 1 replica  
+
+
+测试导入100M的文件，用时多少
+
+
+
+
+

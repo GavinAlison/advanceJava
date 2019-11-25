@@ -25,7 +25,7 @@
         <module>learnehcache</module>
         <module>learnmybatis</module>
         <module>learnmybatis</module>
-        <module>demo</module>
+        <module>aspectjDemo</module>
     </modules>
     <build>
         <plugins>
