@@ -126,9 +126,12 @@ postgres.testschema
 
 
 TODO:
--	动态参数定时导入数据
--	bruied使用队列导入
--	调用方式使用feign方式，不适用httpClient形式
+-	动态参数定时导入数据    
+-	bruied使用队列导入     ok
+-	调用方式使用feign方式，不适用httpClient形式     
+-	编写Scheduled的实现原理，查看如何实现动态添加定时任务，启动，停止，关闭定时任务
+-	编写api网关，实现灰度发布，实现添加jwt的token验证
+-	编写mybatis的测试用用例， 实现单表查询，多表联合查询，动态sql的编写，批量导出
 
 
 用户发送消息，   
@@ -136,4 +139,31 @@ TODO:
 后台开启线程池消费消息队列
 
 ConcurrentLinkedQueue  ---》https://www.cnblogs.com/pony1223/p/9509205.html
+
+
+-	3千万数据查重， 时间需要短， 使用group by having ，此时查询时间为25s
+-	对一对文件，找出含有指定字符的文件
+
+
+-	跟进一下程序报错的问题
+
+
+
+
+-	批量导出，导入数据，统计用时， 记录数据量3000万， 时间多少
+
+数仓+监控+批处理
+
+skywalking链路跟踪
+
+
+调度管理
+调度任务
+
+
+
+
+-	auth中过滤的url 是哪些
+
+
 
