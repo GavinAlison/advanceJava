@@ -20,3 +20,15 @@ https://blog.csdn.net/jisu30miao1225/article/details/80745035
 使用的类，流程， 动态refresh的机制
 
 
+### yml，yaml文件加载工具类
+List<PropertySource<?>> load(String name, Resource resource)
+? 里面是LinkedHashMap类型
+
+
+PropertySource
+-	name
+-	source
+
+
+
+

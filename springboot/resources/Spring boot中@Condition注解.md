@@ -11,7 +11,7 @@
 spring-context.jar
 org.springframework.context.annotation.Conditional
 
-```
+```java
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
@@ -27,10 +27,76 @@ public @interface Conditional {
 ```
 
 ### 使用
-该注解使用在TYPE， 或者METHOD方法上。
-在METHOD上，可以使用Conditional 注解， values是Condition接口的实现类，重写match()方法，根据返回的结果判断是否将方法返回对应的bean
-注入到applicationcContext。
+用在三处地方，1.type-level, 2.meta-annotaion 3. method
+在Docement中有说明
+```
+<li>as a type-level annotation on any class directly or indirectly annotated with
+ * {@code @Component}, including {@link Configuration @Configuration} classes</li>
+ * <li>as a meta-annotation, for the purpose of composing custom stereotype
+ * annotations</li>
+ * <li>as a method-level annotation on any {@link Bean @Bean} method</li>
+ * </ul>
 
+```
+1. type-level
+```java
+//@Configuration   没有必要在加configuration注解
+@Conditional({OrderCondition.class}) // 会自动检测OrderCondition##matches的结果，true 注册容器, false 不进行注册
+public class BeanConfig {
+    
+    //    @Conditional({OrderCondition.class, OrderFalse.class})
+    @Bean(name = "order")
+    public Order order() {
+        return new Order(1, "Air", "Apple air");
+    }
+
+    @Bean("orderdetail")
+    public Orderdetail orderDetail() {
+        return new Orderdetail(1L, "购物者", 1L);
+    }
+}
+```
+2. meta-annotation
+```java
+@Target({ ElementType.TYPE, ElementType.METHOD })
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Conditional(OnClassCondition.class)
+public @interface ConditionalOnClass {
+        /**
+     * The classes that must be present. Since this annotation is parsed by loading class
+     * bytecode, it is safe to specify classes here that may ultimately not be on the
+     * classpath, only if this annotation is directly on the affected component and
+     * <b>not</b> if this annotation is used as a composed, meta-annotation. In order to
+     * use this annotation as a meta-annotation, only use the {@link #name} attribute.
+     * @return the classes that must be present
+     */
+    Class<?>[] value() default {};
+
+    /**
+     * The classes names that must be present.
+     * @return the class names that must be present.
+     */
+    String[] name() default {};
+
+}
+```
+3. method-annotation
+```java
+@Configuration
+public class BeanConfig {
+    @Conditional({OrderCondition.class, OrderFalse.class})
+    @Bean(name = "order")
+    public Order order() {
+        return new Order(1, "Air", "Apple air");
+    }
+}
+```
+
+**注意**
+
+使用Conditional 注解， values是Condition接口的实现类，重写match()方法，根据返回的结果判断是否将方法返回对应的bean
+注入到applicationcContext。
 对应condition的match返回为true,注册到applicationContext中
 
 在TYPE上， condition实现类的match的结果应用到所有的配置类下所有的bean
@@ -43,7 +109,8 @@ Indicates that a component is only eligible for registration when all
 
 
 ### 实现原理
-这个是运行时在spring 容器实现，实现类在`ConfigurationClassPostProcessor`, 实际实现类为`ConfigurationClassParser`
+这个是运行时在spring 容器实现，实现类在`ConfigurationClassPostProcessor`, 实际实现类为`ConditionEvaluator`
+方法shouldSkip， 最终还是会调用condition##matches方法
 
 具体的实现:
 ```
@@ -98,17 +165,45 @@ private List<String[]> getConditionClasses(AnnotatedTypeMetadata metadata) {
         Object values = (attributes != null ? attributes.get("value") : null);
         return (List<String[]>) (values != null ? values : Collections.emptyList());
 }
-
 ```
 ### spring boot 重新定义的Condition
-
-
+@ConditionalOnBean（仅仅在当前上下文中存在某个对象时，才会实例化一个Bean）
+@ConditionalOnClass（某个class位于类路径上，才会实例化一个Bean）
+@ConditionalOnExpression（当表达式为true的时候，才会实例化一个Bean）
+@ConditionalOnMissingBean（仅仅在当前上下文中不存在某个对象时，才会实例化一个Bean）
+@ConditionalOnMissingClass（某个class类路径上不存在的时候，才会实例化一个Bean）
+@ConditionalOnNotWebApplication（不是web应用）
 
 
 ### 自定义Conditional
+```java
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Conditional(OnClazzCondition.class)
+public @interface ConditionOnClazz {
+    Class<?>[] value();
+}
 
+// 注解实现
+public class OnClazzCondition implements Condition {
 
+    @Override
+    public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+//        context==>ConditionEvaluator$ConditionContextImpl
+        System.out.println(context);
+//        metadata ==> StandardAnnotationMetadata
+        System.out.println(metadata);
+//        metadata.getAnnotationAttributes("com.alison.app.condition.ConditionOnClazz")
+//        {value=[class com.alison.app.condition.pojo.Order]}
+        Map<String, Object> conditionMap = metadata.getAnnotationAttributes(ConditionOnClazz.class.getName());
+        return ClassUtils.isPresent(((Class[]) conditionMap.get("value"))[0].getName(), OnClazzCondition.class.getClassLoader());
+    }
+}
 
+@ConditionOnClazz(Order.class)
+public class Config{...}
+```
 
 
 >引用
