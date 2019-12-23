@@ -1,8 +1,10 @@
 package com.alison.spring.beanLifeCycle;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+@Profile("scope")
 public class Test {
 
     public static void main(String[] args) {

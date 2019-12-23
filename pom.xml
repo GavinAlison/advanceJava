@@ -26,6 +26,7 @@
         <module>learnmybatis</module>
         <module>learnmybatis</module>
         <module>aspectjDemo</module>
+        <module>learnHakari</module>
     </modules>
     <build>
         <plugins>

@@ -20,22 +20,28 @@ https://www.iteye.com/blog/bencmai-392239
 -	MQ的集群是如何搭建的
 
 
-
--	@EnableAsync与@Async的原理，
+-	@EnableAsync与@Async的原理
 -	动态参数定时导入数据
 -	bruied使用队列导入
 -	调用方式使用feign方式，不适用httpClient形式
 
-
+## Done
+异步调用的方式
+1. @EnableAsync + @Async
+2. 
 
 @EnableAsync与@Async的原理，
 底层开启一个异步线程，执行任务。
 缺点，开启的多了，线程就多了，内存占用大。
 
+下面这篇文章很好：
+[spring的@Async](https://www.cnblogs.com/wihainan/p/6516858.html)
 
 
+基于@Async的无返回值，也可以有返回值的
 
 
+-	研究一下方法的执行时间，使用注解进行动态注入.
 
 
 
