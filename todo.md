@@ -7,3 +7,9 @@ todo:
 
 
 
+
+
+## 2019-12-26  todo
+1. greenplum 数据库学习
+2. 目录与blog在项目
+
