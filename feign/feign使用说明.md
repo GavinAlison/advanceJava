@@ -6,3 +6,10 @@ feign 使用底层包装了restTemplate, restTemplate底层有包装了httpClien
 
 
 
+## 2020-01-04
+上回跟了一下代码，知道了feign的调用方式，它是将target与handler相结合，
+在使用@FeignClient声明的接口，在调用的时候会根据以下条件进行处理，
+1. 根据@FeignClient的value值管理中心取得项目的地址；
+2. 利用动态代理cglib生成对应动态代理类，这些方法method与目标target在调用时候已经知晓；
+3. 后台会将对应的方法上的url与服务名进行拼接，根据Ribbon的负载均衡的规则进行调用
+4. 最后根据返回的结果进行，后期的处理有Fallback和retry
