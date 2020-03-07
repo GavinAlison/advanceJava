@@ -28,6 +28,7 @@
         <module>aspectjDemo</module>
         <module>learnHakari</module>
         <module>easyexcel</module>
+        <module>javaprocess</module>
     </modules>
     <build>
         <plugins>
