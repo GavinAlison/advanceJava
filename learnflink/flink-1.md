@@ -25,7 +25,4 @@
 当然，这种也是我打算做的，应该可以学到不少东西的。
 
 
-
-
-
 >http://www.54tianzhisheng.cn/2018/10/13/flink-introduction/

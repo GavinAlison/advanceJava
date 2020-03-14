@@ -29,6 +29,7 @@
         <module>learnHakari</module>
         <module>easyexcel</module>
         <module>javaprocess</module>
+        <module>logback</module>
     </modules>
     <build>
         <plugins>
