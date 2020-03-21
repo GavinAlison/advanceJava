@@ -7,6 +7,6 @@ public class GeneratePassword {
         return new BCryptPasswordEncoder().encode(password);
     }
     public static void main(String[] args) {
-        System.out.println(generatePassword("pwd"));
+        System.out.println(generatePassword("123"));
     }
 }

@@ -27,14 +27,19 @@
 -   初识sed和gawk
 -   shell脚本编程进阶
 
-sciprt: 2020-03-14
-
+script: 2020-03-14
+初识sed和gawk: 2020-03-14
+shell脚本编程进阶: 2020-03-20
 
 ## day4
 
 -   sed进阶
 -   gawk进阶
 -   mysql数据库
+
+sed进阶: 2020-03-20
+
+
 
 ## day5
 

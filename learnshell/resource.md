@@ -11,3 +11,16 @@ https://github.com/PowerShell/PowerShell
 3. learn bash shell
 
 http://c.biancheng.net/view/1145.html
+
+4.  SHELL版新手导航
+
+http://bbs.chinaunix.net/thread-674903-1-1.html
+
+5. shell 十三問
+
+http://bbs.chinaunix.net/forum.php?mod=viewthread&tid=218853&page=7#pid1636825
+
+6. I/O重定向 详解及例子
+
+http://bbs.chinaunix.net/forum.php?mod=viewthread&tid=484163
+
