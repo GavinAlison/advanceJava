@@ -626,5 +626,6 @@ x：交换模式空间和保留空间的内容
 
 
 
->link
-https://www.cnblogs.com/tureno/articles/6677942.html
+>### link    
+https://www.cnblogs.com/tureno/articles/6677942.html        
+https://www.cnblogs.com/BurnovBlog/p/10825436.html

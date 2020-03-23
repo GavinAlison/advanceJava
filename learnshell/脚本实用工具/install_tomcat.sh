@@ -109,18 +109,18 @@ config_env() {
 }
 
 main() {
-check_dir $install_log_path $install_path
-check_yum_command wget wget
-check_yum_command unzip unzip
-download_file $URL
+    check_dir $install_log_path $install_path
+    check_yum_command wget wget
+    check_yum_command unzip unzip
+    download_file $URL
 
-software_name=$(echo $URL|awk -F'/' '{print $NF}'|awk -F'.zip' '{print $1}')
-for filename in `ls $download_path`;do
-    extract_file ${download_path}$filename
-done
-rm -fr ${download_path}
-ln -s $install_path$software_name ${install_path}tomcat
-config_env ${install_path}tomcat/bin
+    software_name=$(echo $URL|awk -F'/' '{print $NF}'|awk -F'.zip' '{print $1}')
+    for filename in `ls $download_path`;do
+        extract_file ${download_path}$filename
+    done
+    rm -fr ${download_path}
+    ln -s $install_path$software_name ${install_path}tomcat
+    config_env ${install_path}tomcat/bin
 }
 
 main

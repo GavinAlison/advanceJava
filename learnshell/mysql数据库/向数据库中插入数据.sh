@@ -9,10 +9,10 @@ then
 else
 	#脚本变量一定要用双引号，字符串变量使用单引号
 	statement=" insert into em_admin values(NULL, '$1', $2)"
-	$MYSQL emwjs -u test <<EOF
-	$statement
+$MYSQL  -u root <<EOF
+$statement
 EOF
-	if [ $? -eq 0 ]
+	if [ $? -eq 0 ];
 	then
 		echo Data successfully added
 	else
