@@ -4,7 +4,7 @@
 #@author: alison
 #@times: 2020-03-22
 #@systemVersion: CentOs-7
-
+# mysql 5.6
 # root 用户进入
 
 if [ -d '/usr/local/mysql' ]; then
@@ -84,6 +84,8 @@ bind-address=0.0.0.0
 #explicit_defaults_for_timestamp=true
 EOF
 
+sleep 10
+ps -aux | pgrep mysql | xargs kill -9
 #11. 启动服务 mysqld_safe, 修改root密码
 /usr/local/mysql/bin/mysqld_safe --skip-grant-tables &
 
@@ -93,7 +95,7 @@ sleep 10
 #source mysql_update_passwd
 #insert into user values('%', 'root', password('root'),'Y','Y','Y','Y','Y','Y','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N','N',
 #'N','N,'N','N','N','N','N','','','','','0','0','0','0','mysql_native_password','','N');
-/usr/local/mysql/bin/mysql -S /usr/local/mysql/data/mysql.socket <<EOF
+/usr/local/mysql/bin/mysql -S /usr/local/mysql/data/mysql.socket -e "
 use mysql;
 update mysql.user set host='%' where user='root' and host='localhost.localdomain';
 update mysql.user set password=password('root') where user='root';
@@ -101,17 +103,17 @@ update mysql.user set password=password('root') where user='root';
 create database If Not Exists mysqlts Character Set UTF8;
 flush privileges;
 commit;
-EOF
+"
 
 ps -aux | pgrep mysql | xargs kill -9
 /usr/local/mysql/support-files/mysql.server start
 sleep 5
 # 创建用户mysql
-/usr/local/mysql/bin/mysql -uroot -proot <<EOF
+/usr/local/mysql/bin/mysql -uroot -proot -e "
 create user 'mysql'@'%' identified by 'mysql';
 grant all privileges on *.* to 'mysql'@'%';
 flush privileges;
-EOF
+"
 
 sleep 5
 

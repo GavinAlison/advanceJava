@@ -64,3 +64,8 @@ END{ for(c in pop) printf("%15-s%6d\n", c, pop[c]) | "sort -nk 2"; close("sort -
 
 close("sort -nk 2")
 
+
+
+awk -F: '/root/ {print $7}' /etc/passwd
+
+awk -F ':'  '{print $NF}'  /file.log

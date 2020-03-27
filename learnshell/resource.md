@@ -24,3 +24,7 @@ http://bbs.chinaunix.net/forum.php?mod=viewthread&tid=218853&page=7#pid1636825
 
 http://bbs.chinaunix.net/forum.php?mod=viewthread&tid=484163
 
+
+7. shell实用脚本
+
+https://github.com/taoxiongfeng/accumulation/blob/master/linux/3.mysql5.6%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%AE%89%E8%A3%85.md
