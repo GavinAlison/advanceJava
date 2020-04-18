@@ -9,3 +9,7 @@ echo "The System Administrator manual" | sed 's/\(System\) Administrator/\1 user
 #在长数字中插入逗号
 echo "1234567" | sed '{:start; s/\(.*[0-9]\)\([0-9]\{3\}\)/\1,\2/; t start}'
 
+
+
+
+# 

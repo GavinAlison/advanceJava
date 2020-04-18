@@ -26,10 +26,10 @@
         <module>learnmybatis</module>
         <module>learnmybatis</module>
         <module>aspectjDemo</module>
-        <module>learnHakari</module>
         <module>easyexcel</module>
         <module>javaprocess</module>
         <module>logback</module>
+        <module>springbootkafka</module>
     </modules>
     <build>
         <plugins>

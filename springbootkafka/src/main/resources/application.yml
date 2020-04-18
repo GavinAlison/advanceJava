@@ -1,0 +1,36 @@
+spring:
+  kafka:
+    consumer:
+      group-id: foo
+      enable-auto-commit: true
+      auto-commit-interval: 1000
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#kafka:
+#  consumer:
+#    servers: localhost:9092
+#    enable:
+#      auto:
+#        commit: true #(是否自动提交)
+#    session:
+#      timeout: 20000 #连接超时时间
+#    auto:
+#      commit:
+#        interval: 100
+#      offset:
+#        reset: latest # (实时生产，实时消费，不会从头开始消费)
+#    topic: result #消费者的topic
+#    group-id: foo   #(消费组)
+#    concurrency: 10 #(设置消费线程数)
+##  producer:
+##    servers: 118.89.28.233:9092
+##    topic: result #(生产的topic)
+##    retries: 0
+##    batch:
+##      size: 4096
+##    linger: 1
+##    buffer:
+##      memory: 40960
+logging:
+  level:
+    org.apache.kafka: off
