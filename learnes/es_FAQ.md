@@ -41,3 +41,11 @@ JVM 配置优化
 -	记录一次mapping field修改过程--》https://www.cnblogs.com/Creator/p/3722408.html
 -	Elasticsearch Map对not_analyzed文档不敏感--》https://codeday.me/bug/20180824/222086.html
 -	Elasticsearch 基础理论 & 配置调优-->https://www.cnblogs.com/zhengchunyuan/p/8065335.html
+
+
+###  updated host [http://172.16.101.41:9200] already in blacklist
+
+es被拉入到一个blackList，解决方法，使用其他es的ip
+
+
+
