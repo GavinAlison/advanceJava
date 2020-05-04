@@ -13,3 +13,4 @@ feign 使用底层包装了restTemplate, restTemplate底层有包装了httpClien
 2. 利用动态代理cglib生成对应动态代理类，这些方法method与目标target在调用时候已经知晓；
 3. 后台会将对应的方法上的url与服务名进行拼接，根据Ribbon的负载均衡的规则进行调用
 4. 最后根据返回的结果进行，后期的处理有Fallback和retry
+

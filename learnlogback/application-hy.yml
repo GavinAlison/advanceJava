@@ -1,0 +1,38 @@
+anyest:
+  server:
+    enable-stat: false
+    enable-save: true
+    enable-analysis: true
+  ################Anyest-Engine-Client配置####################
+  client:
+    enable: true
+    able-api: true
+    ReadTimeout: 500000
+    ConnectTimeout: 120000
+
+logging:
+  level:
+    jrx.anyest.base: debug
+  config: classpath:./logback-hy.xml
+  file: ${spring.application.name}.log
+
+###################Eureka客户端配置########################
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    ip-address: 127.0.0.1
+    prefer-ip-address: true
+    instance-id: ${eureka.instance.ip-address}:${server.port}
+    metadata-map:
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+  client:
+    registryFetchIntervalSeconds: 5
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:9800/eureka
+
+
+
