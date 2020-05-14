@@ -26,6 +26,11 @@ public class ForkJoinDemo {
         System.out.println("ForkJoin sum done in: " + measureSumPerf(
                 ForkJoinDemo::forkJoinSum, 10_000_000) + " msecs");
     }
+    @Test
+    public void test1() {
+        System.out.println("ForkJoin sum done in: " + measureSumPerf(
+                n->ForkJoinDemo.forkJoinSum(n), 10_000_000) + " msecs");
+    }
 
     public class ForkJoinSumCalculator
             extends java.util.concurrent.RecursiveTask<Long> {
