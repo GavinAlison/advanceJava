@@ -65,8 +65,7 @@ http://172.16.102.21:9280/collector/sync/{operateType}/{dataKey}
 
 同步元数据的接口
 
-GIT
-http://10.0.11.44:1000/basic-component
+GIT    
 http://10.0.11.44:1000/basic-component/buried-point.git
 
 junit测试
