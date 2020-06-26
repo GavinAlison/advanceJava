@@ -29,6 +29,7 @@
         <module>javaprocess</module>
         <module>logback</module>
         <module>springbootkafka</module>
+        <module>aopDemo</module>
     </modules>
     <build>
         <plugins>
