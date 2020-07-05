@@ -29,3 +29,16 @@ IOC依赖注入
 #TODO
 -   为什么ClassPathXmlApplicationCotext需要设置parentContext, 
 -   ClassPathXmlApplicationContext设置多个locations
+
+
+
+
+>https://www.gameboys.cn/article/178
+>https://www.gameboys.cn/article/171
+>https://www.cnblogs.com/zedosu/p/6709921.html
+>https://www.cnblogs.com/davidwang456/category/461542.html
+>https://blog.csdn.net/u010013573/article/details/86547687
+>https://blog.csdn.net/nuomizhende45/article/details/81158383
+>https://mp.weixin.qq.com/s?__biz=MzU5MDgzOTYzMw==&mid=2247484564&idx=1&sn=84bd8fee210c0d00687c3094431482a7&scene=21#wechat_redirect
+>https://mp.weixin.qq.com/s?__biz=MzU5MDgzOTYzMw==&mid=2247484561&idx=1&sn=a7281dae7aaaa3499d59dec730464e63&scene=21#wechat_redirect
+>
