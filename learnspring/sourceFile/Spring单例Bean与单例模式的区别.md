@@ -1,7 +1,6 @@
 ## Spring单例Bean与单例模式的区别
 区别在于它们关联的环境不一样，单例模式是指在一个JVM进程中仅有一个实例，而Spring单例是指一个Spring Bean容器(ApplicationContext)中仅有一个实例。
 
-
 现在枚举是单例模式的最佳实践,内置的Runtime
 
 // 基于懒汉模式实现, 在一个JVM实例中始终只有一个实例

@@ -5,12 +5,13 @@
 
 所以在这里深入了解一下吧，同时也是借鉴别人写的文章， 下面主要列举一下自己关注点，自己的问题，功能性验证点。将这些文档 做成简单版，图花版，文字版，备注到简书， cnblogs, csdn，github等技术博客上去。 主要是做一些推广。
 
--	spring resource的加载方式，实现类与接口，主要方法，还有涉及到什么设计模式。
+-	spring resource的加载方式，实现类与接口，主要方法，还有涉及到什么设计模式
 -	spring aop的实现方式， 注意事项
 -	spring aop与aspectj的区别
 -	spring aop与interceptor的区别
 -	spring aop数据埋点的实现与区别
 -	spring IOC的实现原理，自己实现一个IOC框架
 -	spring @transactional的原理， 事务的实现方式
--	
-
+-   spring aop调用本类方法没有生效问题
+https://www.tuicool.com/articles/FVZ7rqy
+-   
