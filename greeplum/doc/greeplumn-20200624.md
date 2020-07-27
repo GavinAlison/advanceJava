@@ -15,10 +15,9 @@ echo "sql语句" | psql -h 主机 -p 端口 -U 用户名
 psql -c "sql语句"　-h 主机 -p 端口 -U 用户名
 
 3)Shell代码
-psql -f 文件名.sql -h 主机 -p 端口 -U 用户名
+psql -f 文件名.sql -h 主机 -p 端口 -U 用户名 -d database
 
 ```
 
-## 
 
 
