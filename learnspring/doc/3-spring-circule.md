@@ -24,13 +24,13 @@
 `Caused by: org.springframework.beans.factory.BeanCurrentlyInCreationException: Error creating bean with name 'a': Requested bean is currently in creation: Is there an unresolvable circular reference?`
 
 为了测试循环依赖的解决情况跟注入方式的关系，我们做如下四种情况的测试
-
+```
 依赖情况	依赖注入方式	循环依赖是否被解决
 AB相互依赖（循环依赖）	均采用setter方法注入	是
 AB相互依赖（循环依赖）	均采用构造器注入	否
 AB相互依赖（循环依赖）	A中注入B的方式为setter方法，B中注入A的方式为构造器	是
 AB相互依赖（循环依赖）	B中注入A的方式为setter方法，A中注入B的方式为构造器	否
-
+```
 从上面的测试结果我们可以看到，不是只有在setter方法注入的情况下循环依赖才能被解决，即使存在构造器注入的场景下，循环依赖依然被可以被正常处理掉。
 
 ### Spring到底是怎么处理的循环依赖呢？
@@ -62,22 +62,47 @@ public class B {
 首先，我们要知道Spring在创建Bean的时候默认是按照自然排序来进行创建的，所以第一步Spring会去创建A。
 
 与此同时，我们应该知道，Spring在创建Bean的过程中分为三步
-
+```
 实例化，对应方法：AbstractAutowireCapableBeanFactory中的createBeanInstance方法
 
 属性注入，对应方法：AbstractAutowireCapableBeanFactory的populateBean方法
 
 初始化，对应方法：AbstractAutowireCapableBeanFactory的initializeBean
 
+```
 这些方法在之前源码分析的文章中都做过详细的解读了，如果你之前没看过我的文章，那么你只需要知道
-
+```
 实例化，简单理解就是new了一个对象
 属性注入，为实例化中new出来的对象填充属性
 初始化，执行aware接口中的方法，初始化方法，完成AOP代理
+```
+基于上面的知识，我们开始解读整个循环依赖处理的过程，整个流程应该是以A的创建为起点，前文也说了，
+第一步就是创建A嘛！
 
 
+创建A的过程实际上就是调用getBean方法，这个方法有两层含义
 
+-   创建一个新的Bean
+-   从缓存中获取到已经被创建的对象
+我们现在分析的是第一层含义，因为这个时候缓存中还没有A嘛！
 
+调用getSingleton(beanName)
+
+首先调用getSingleton(a)方法，这个方法又会调用getSingleton(beanName, true)，在上图中我省略了这一步
+
+``` 
+public Object getSingleton(String beanName) {
+    return getSingleton(beanName, true);
+}
+```
+
+getSingleton(beanName, true)这个方法实际上就是到缓存中尝试去获取Bean，整个缓存分为三级
+
+-   singletonObjects，一级缓存，存储的是所有创建好了的单例Bean
+-   earlySingletonObjects，完成实例化，但是还未进行属性注入及初始化的对象
+-   singletonFactories，提前暴露的一个单例工厂，二级缓存中存储的就是从这个工厂中获取到的对象
+
+因为A是第一次被创建，所以不管哪个缓存中必然都是没有的，因此会进入getSingleton的另外一个重载方法getSingleton(beanName, singletonFactory)。
 
 
 

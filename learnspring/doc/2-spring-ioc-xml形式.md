@@ -35,7 +35,6 @@ idea 2020, spring framework 5.3 , gradle 6.4
    -    将解析成BeanDefinitionHolder对象，然后将BeanDefinitionHolder注册到DefaultListableBeanFactory的BeanDefinitionMap中去
    -    同时注册到BeanDefinitionRegistry中的单例中，
 5. Application.getBean("name")
-
     5.1 先判断状态， active, closed, 只有active中有值才可以       
     5.2 获取对应的beanFactory容器，然后从容器中加载对应的bean，         
     5.3 根据name到aliasMap中查找真正的beanName       
