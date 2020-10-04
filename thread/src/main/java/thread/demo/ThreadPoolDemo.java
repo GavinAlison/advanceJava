@@ -1,8 +1,6 @@
 package thread.demo;
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /***
  * @Author Alison
@@ -10,6 +8,25 @@ import java.util.concurrent.TimeUnit;
  **/
 
 public class ThreadPoolDemo {
+
+
+    public void test1() {
+//        ThreadPoolExecutor
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
+//Executors.FinalizableDelegatedExecutorService
+        executorService = Executors.newSingleThreadExecutor();
+//        ThreadPoolExecutor
+        executorService = Executors.newCachedThreadPool();
+//        ScheduledThreadPoolExecutor
+        executorService = Executors.newScheduledThreadPool(10);
+//        ForkJoinPool
+        executorService = Executors.newWorkStealingPool();
+
+        executorService.submit(() -> {
+            int i = 0;
+        });
+
+    }
 
     private static final int THREAD_SIZE = 1;
     private static final int CAPACITY = 1;

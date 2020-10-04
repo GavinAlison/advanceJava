@@ -8,13 +8,13 @@ GenericApplicationContext实现了BeanDefinitionRegistry接口，
 -   AnnotationConfigApplicationContext继承AbstractApplicationContext，
 AbstractApplicationContext提供了ApplicationContext的抽象实现。
 
-
+几个步骤：
+根据bean配置类，使用BeanDefinition解析Bean的定义信息，主要是一些注解信
 ### 分析AnnotationConfigApplicationContext的初始化过程：
 1. this() 初始化bean读取器和扫描器
 2. register(annotatedClasses) 实现注解bean的读取
 ```
-register方法重点完成了bean配置类本身的解析和注册，处理过程可以分为以下几个步骤：
-根据bean配置类，使用BeanDefinition解析Bean的定义信息，主要是一些注解信息
+register方法重点完成了bean配置类本身的解析和注册，处理过程可以分为以下息
 Bean作用域的处理，默认缺少@Scope注解，解析成单例
 借助AnnotationConfigUtils工具类解析通用注解
 将bean定义信息已beanname，beandifine键值对的形式注册到ioc容器中

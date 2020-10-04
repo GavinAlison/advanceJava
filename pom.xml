@@ -30,6 +30,7 @@
         <module>logback</module>
         <module>springbootkafka</module>
         <module>aopDemo</module>
+        <module>learnladp</module>
     </modules>
     <repositories>
         <repository>
