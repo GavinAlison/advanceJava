@@ -3,6 +3,7 @@ package thread.consumeAndProduce;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicLong;
 
 /***
  * @Author Alison
@@ -30,8 +31,9 @@ public class BlockingQueueDemo {
      * 下面来看由阻塞队列实现的生产者消费者模型,这里我们使用take()和put()方法，这里生产者和生产者，消费者和消费者之间不存在同步，所以会出现连续生成和连续消费的现象
      */
     private static final BlockingQueue<Integer> queue = new LinkedBlockingQueue<Integer>(10);
-    private static final BlockingQueue<Integer> queue1 = new ArrayBlockingQueue<>(10);
-    private static int count = 0;
+    private static final BlockingQueue<Long> queue1 = new ArrayBlockingQueue<>(10);
+    private static AtomicLong count = new AtomicLong(0);
+    private static AtomicLong producerCount = new AtomicLong(0);
     private static class Consumer extends Thread {
         @Override
         public void run() {
@@ -39,8 +41,8 @@ public class BlockingQueueDemo {
                 try {
                     Thread.sleep(100);
                     queue1.take();
-                    count--;
-                    System.out.println(Thread.currentThread().getName() + " consume " + count);
+                    count.incrementAndGet();
+                    System.out.println(Thread.currentThread().getName() + " consume " + count.get());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -53,8 +55,9 @@ public class BlockingQueueDemo {
             try {
                 for (int i = 0; i < 10; i++) {
                     Thread.sleep(100);
-                    queue1.put(count++);
-                    System.out.println(Thread.currentThread().getName() + " Produce " + count);
+                    queue1.offer(1L);
+                    producerCount.incrementAndGet();
+                    System.out.println(Thread.currentThread().getName() + " Produce " + producerCount.get());
                 }
             } catch (Exception e) {
                 e.printStackTrace();

@@ -1,5 +1,6 @@
 package thread.consumeAndProduce;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -18,7 +19,7 @@ public class LockDemo {
      * 然后锁需要被释放两次才能获得真正释放。已经获取锁的线程进入其他需要相同锁的同步代码块不会被阻塞。
      */
     static class Demo1 {
-        private static int count = 0;
+        private static AtomicInteger count = new AtomicInteger(0);
         private static int capacity = 10;
         private Lock lock = new ReentrantLock();
         private Condition notFull = lock.newCondition();// 生产者条件
@@ -30,10 +31,10 @@ public class LockDemo {
                     lock.lock();
                     try {
                         Thread.sleep(100);
-                        while (count >= capacity) {
+                        while (count.get() >= capacity) {
                             notFull.await();
                         }
-                        count++;
+                        count.incrementAndGet();
                         System.out.println(Thread.currentThread().getName() + " produce ,  count=" + count);
                         notEmpty.signalAll();
                     } catch (Exception e) {
@@ -51,10 +52,10 @@ public class LockDemo {
                     lock.lock();
                     try {
                         Thread.sleep(100);
-                        while (count <= 0) {
+                        while (count.get() <= 0) {
                             notEmpty.await();
                         }
-                        count--;
+                        count.decrementAndGet();
                         System.out.println(Thread.currentThread().getName() + " consume ,  count=" + count);
                         notFull.signalAll();
                     } catch (Exception e) {
