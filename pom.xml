@@ -32,6 +32,8 @@
         <module>aopDemo</module>
         <module>learnladp</module>
         <module>leetcode</module>
+        <module>demo</module>
+        <module>test</module>
     </modules>
     <repositories>
         <repository>

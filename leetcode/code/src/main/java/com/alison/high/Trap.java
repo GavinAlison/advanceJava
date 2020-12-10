@@ -9,31 +9,32 @@ public class Trap {
     public int trap(int[] height) {
         int sum = 0;
         int len = height.length;
-        int lmax =0, rmax= 0;
-        for(int i = 1 ; i< len-1; i++){
-            for(int j = i+1; j<len; j++){
+        int lmax = 0, rmax = 0;
+        for (int i = 1; i < len - 1; i++) {
+            for (int j = i + 1; j < len; j++) {
                 rmax = height[j] > rmax ? height[j] : rmax;
             }
-            for(int j= i-1; j>=0; j--){
-                lmax = height[j]> lmax ? height[j]:lmax;
+            for (int j = i - 1; j >= 0; j--) {
+                lmax = height[j] > lmax ? height[j] : lmax;
             }
-            sum += ( ( lmax > rmax ? rmax : lmax ) - height[i]);
+            sum += ((lmax > rmax ? rmax : lmax) - height[i]);
         }
         return sum;
     }
+
     //优化，使用备忘录优化，先记录所有i上左最大值，右最大值, 存储到一个数组中
-    public int trap2(int[] height) {
-        int sum = 0;
-        int len = height.length;
-        int[] lmax = new int[len];
-        int[] rmax = new int[len];
-        lmax[0]
-        for(int i = 1 ; i< len-1; i++){
-            for(int j= i-1; j>=0; j--){
-                lmax = height[j]> lmax ? height[j]:lmax;
-            }
-            sum += ( ( lmax > rmax ? rmax : lmax ) - height[i]);
-        }
-        return sum;
-    }
+//    public int trap2(int[] height) {
+//        int sum = 0;
+//        int len = height.length;
+//        int[] lmax = new int[len];
+//        int[] rmax = new int[len];
+////        int lmax = 0;
+//        for (int i = 1; i < len - 1; i++) {
+//            for (int j = i - 1; j >= 0; j--) {
+//                lmax = height[j] > lmax ? height[j] : lmax;
+//            }
+//            sum += ((lmax > rmax ? rmax : lmax) - height[i]);
+//        }
+//        return sum;
+//    }
 }

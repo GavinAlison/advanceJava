@@ -60,7 +60,8 @@ HashCodeInterceptor，不会走入spring的inteceptor chian。
 
 4. 如果spring没有配置advise，则走了cglib的MethodInterceptor进行处理，
 直接delegate到相关proxy.method上(例如：StaticUnadvisedExposedInterceptor,
-DynamicUnadvisedExposedInterceptor会区分targetSource是否是单例，exposeProxy属性做相应的优化),也不会走入spring的inteceptor chian。
+DynamicUnadvisedExposedInterceptor会区分targetSource是否是单例，
+exposeProxy属性做相应的优化),也不会走入spring的inteceptor chian。
 
 5. 如果spring配置了advise ， 而且是isFrozen，默认值为false，
 这样会走到基于cglib MethodInterceptor的DynamicAdvisedInterceptor进行处理。
