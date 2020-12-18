@@ -171,4 +171,13 @@ source /etc/profile
 #@ 后面是访问mysql的客户端ip地址（或是 主机名） % 代表任意的客户端，如果填写 localhost为本地访问（那此用户就不能远程访问该mysql数据库了）。
 #同时也可以为现有的用户设置是否具有远程访问权限
 
-
+### Please configure the 'hostname' command to return a correct
+#解决办法
+#
+#1、查看/etc/hosts，内容如下：
+#
+## Do not remove the following line, or various programs
+#
+## that require network functionality will fail.
+#
+#::1 localhost.localdomain localhost
