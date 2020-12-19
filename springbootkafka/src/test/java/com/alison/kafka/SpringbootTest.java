@@ -34,6 +34,7 @@ public class SpringbootTest {
 //        logger.info("All received");
 //    }
 
+    @Test
     @KafkaListener(topics = "topic")
     public void listen(ConsumerRecord<?, ?> cr) throws Exception {
         logger.info(cr.toString());

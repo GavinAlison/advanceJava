@@ -10,7 +10,8 @@ import java.util.Map;
  * 队列事件数据封装
  *
  *
- * offset = 42, key = {"database":"demo","table":"test","pk.id":4}, value = {"database":"demo","table":"test","type":"insert","ts":1578016448,"xid":63708,"commit":true,"data":{"id":4,"name":"吕洞宾"}}
+ * offset = 42, key = {"database":"demo","table":"test","pk.id":4},
+ * value = {"database":"demo","table":"test","type":"insert","ts":1578016448,"xid":63708,"commit":true,"data":{"id":4,"name":"吕洞宾"}}
  * @author yxy
  * @date 2018/12/11
  */

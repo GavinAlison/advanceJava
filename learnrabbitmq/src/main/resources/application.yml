@@ -7,9 +7,10 @@ spring:
     username: guest
     password: guest
 #logging:
-#  level:
-#    org: ERROR
+
 #client:
 logging:
   config: classpath:log4j2.xml
+  level:
+    org: ERROR
 #  duration: 30000

@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import java.util.Map;
 import java.util.Properties;
+
 import static org.apache.kafka.clients.producer.ProducerConfig.*;
 
 /**
@@ -24,13 +25,15 @@ import static org.apache.kafka.clients.producer.ProducerConfig.*;
 public class KafkaProducerTest {
 
     private static KafkaProducer<String, String> producer;
-    private final static String TOPIC = "3_dml_maxwell";
+    private final static String TOPIC = "topic2";
 
     @Before
-    public void  before() {
+    public void before() {
+//        ch.qos.logback.classic.Logger logger = (ch.qos.logback.classic.Logger) StaticLoggerBinder.getSingleton().getLoggerFactory().getLogger("org.apache.kafka");
+//        logger.setLevel(Level.OFF);
 
-        Properties props =  new Properties();
-        props.put(BOOTSTRAP_SERVERS_CONFIG, "172.16.102.23:9092");
+        Properties props = new Properties();
+        props.put(BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         props.put(ACKS_CONFIG, "all");
         props.put(RETRIES_CONFIG, 3); // 重试次数
         props.put(BATCH_SIZE_CONFIG, 1000); // 批量发送大小
@@ -39,8 +42,8 @@ public class KafkaProducerTest {
         props.put(CLIENT_ID_CONFIG, "producer-syn-2"); // 发送端id,便于统计
         props.put(KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
         props.put(VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
-        props.put(TRANSACTIONAL_ID_CONFIG,"producer-1"); // 每台机器唯一
-        props.put(ENABLE_IDEMPOTENCE_CONFIG,true); // 设置幂等性
+        props.put(TRANSACTIONAL_ID_CONFIG, "producer-1"); // 每台机器唯一
+        props.put(ENABLE_IDEMPOTENCE_CONFIG, true); // 设置幂等性
 
         producer = new KafkaProducer<String, String>(props);
         producer.initTransactions();
@@ -63,11 +66,11 @@ public class KafkaProducerTest {
     @Test
     public void testInsert() throws Exception {
 
-        for(int i=0;i<1;i++){
+        for (int i = 0; i < 1; i++) {
             JSONObject object = new JSONObject();
 
-            object.put("id","1");
-            object.put("name","张三");
+            object.put("id", "1");
+            object.put("name", "张三");
             QueueData<JSONObject> queueData = new QueueData();
             queueData.setDatabase("demo");
             queueData.setTable("test");
@@ -76,19 +79,18 @@ public class KafkaProducerTest {
             queueData.setCommit(true);
             queueData.setData(object);
 
-            Map<String,Object> pkIds = Maps.newHashMap();
-            pkIds.put("id","2");
+            Map<String, Object> pkIds = Maps.newHashMap();
+            pkIds.put("id", "2");
             queueData.setPkIds(pkIds);
 
             JSONObject keyJson = new JSONObject();
-            keyJson.put("table",queueData.getTable());
-            keyJson.put("database",queueData.getDatabase());
-            pkIds.forEach((k,v) ->{
-                keyJson.put("pk."+k,v);
+            keyJson.put("table", queueData.getTable());
+            keyJson.put("database", queueData.getDatabase());
+            pkIds.forEach((k, v) -> {
+                keyJson.put("pk." + k, v);
             });
-            send(JSON.toJSONString(keyJson),JSON.toJSONString(queueData));
+            send(JSON.toJSONString(keyJson), JSON.toJSONString(queueData));
         }
-
 
 
     }
@@ -96,11 +98,11 @@ public class KafkaProducerTest {
     @Test
     public void testUpdate() throws JSONException {
 
-        for(int i=0;i<1;i++){
+        for (int i = 0; i < 1; i++) {
             JSONObject object = new JSONObject();
 
-            object.put("id","1");
-            object.put("name","王五");
+            object.put("id", "1");
+            object.put("name", "王五");
             QueueData<JSONObject> queueData = new QueueData();
             queueData.setDatabase("demo");
             queueData.setTable("test");
@@ -109,19 +111,18 @@ public class KafkaProducerTest {
             queueData.setCommit(true);
             queueData.setData(object);
 
-            Map<String,Object> pkIds = Maps.newHashMap();
-            pkIds.put("id","1");
+            Map<String, Object> pkIds = Maps.newHashMap();
+            pkIds.put("id", "1");
             queueData.setPkIds(pkIds);
 
             JSONObject keyJson = new JSONObject();
-            keyJson.put("table",queueData.getTable());
-            keyJson.put("database",queueData.getDatabase());
-            pkIds.forEach((k,v) ->{
-                keyJson.put("pk."+k,v);
+            keyJson.put("table", queueData.getTable());
+            keyJson.put("database", queueData.getDatabase());
+            pkIds.forEach((k, v) -> {
+                keyJson.put("pk." + k, v);
             });
-            send(JSON.toJSONString(keyJson),JSON.toJSONString(queueData));
+            send(JSON.toJSONString(keyJson), JSON.toJSONString(queueData));
         }
-
 
 
     }
@@ -129,10 +130,10 @@ public class KafkaProducerTest {
     @Test
     public void testDelete() throws JSONException {
 
-        for(int i=0;i<1;i++){
+        for (int i = 0; i < 1; i++) {
             JSONObject object = new JSONObject();
 
-            object.put("id","1");
+            object.put("id", "1");
             QueueData<JSONObject> queueData = new QueueData();
             queueData.setDatabase("demo");
             queueData.setTable("test");
@@ -141,40 +142,38 @@ public class KafkaProducerTest {
             queueData.setCommit(true);
             queueData.setData(object);
 
-            Map<String,Object> pkIds = Maps.newHashMap();
-            pkIds.put("id","1");
+            Map<String, Object> pkIds = Maps.newHashMap();
+            pkIds.put("id", "1");
             queueData.setPkIds(pkIds);
 
             JSONObject keyJson = new JSONObject();
-            keyJson.put("table",queueData.getTable());
-            keyJson.put("database",queueData.getDatabase());
-            pkIds.forEach((k,v) ->{
-                keyJson.put("pk."+k,v);
+            keyJson.put("table", queueData.getTable());
+            keyJson.put("database", queueData.getDatabase());
+            pkIds.forEach((k, v) -> {
+                keyJson.put("pk." + k, v);
             });
-            send(JSON.toJSONString(keyJson),JSON.toJSONString(queueData));
+            send(JSON.toJSONString(keyJson), JSON.toJSONString(queueData));
         }
-
 
 
     }
 
     @Test
-    public void testinsert(){
+    public void testinsert() {
 //        k:{"table":"stg_event_var_ccreditikifhtrjf"},
 //        v:{"commit":false,"data":{"field_score":0.0,"ab_path_4":"","ab_path_1":"","field_code":"jkgjjdwjcbl","ab_path_3":"","ab_path_2":"","field_bid":"o5676","store_time":1603431655942,"field_value":"0.05","ab_path_2_name":"","class":"jrx.anyest.engine.base.strategy.event.model.StrategyResultVariable","ab_path_4_name":"","ab_path_1_name":"","field_name":"接口公积金单位缴存比例","parent_field_name":"","extra_1":"","ab_path_3_name":"","extra_2":"","event_id":"160343165234560653661","extra_3":"","parent_field":"","field_type":"CONDITION_FIELD","event_time":1603431652345,"field_object_code":"5392"},"database":"","offset":0,"partition":0,"table":"stg_event_var_ccreditikifhtrjf","ts":0,"type":"INSERT"}
 
         String key = "{\"table\":\"stg_event_var_ccreditikifhtrjf\"}";
-        String value =" {\"commit\":false,\"data\":{\"field_score\":0.0,\"ab_path_4\":\"\",\"ab_path_1\":\"\",\"field_code\":\"jkgjjdwjcbl\",\"ab_path_3\":\"\",\"ab_path_2\":\"\",\"field_bid\":\"o5676\",\"store_time\":1603431655942,\"field_value\":\"0.05\",\"ab_path_2_name\":\"\",\"class\":\"jrx.anyest.engine.base.strategy.event.model.StrategyResultVariable\",\"ab_path_4_name\":\"\",\"ab_path_1_name\":\"\",\"field_name\":\"接口公积金单位缴存比例\",\"parent_field_name\":\"\",\"extra_1\":\"\",\"ab_path_3_name\":\"\",\"extra_2\":\"\",\"event_id\":\"160343165234560653661\",\"extra_3\":\"\",\"parent_field\":\"\",\"field_type\":\"CONDITION_FIELD\",\"event_time\":1603431652345,\"field_object_code\":\"5392\"},\"database\":\"\",\"offset\":0,\"partition\":0,\"table\":\"stg_event_var_ccreditikifhtrjf\",\"ts\":0,\"type\":\"INSERT\"}";
+        String value = " {\"commit\":false,\"data\":{\"field_score\":0.0,\"ab_path_4\":\"\",\"ab_path_1\":\"\",\"field_code\":\"jkgjjdwjcbl\",\"ab_path_3\":\"\",\"ab_path_2\":\"\",\"field_bid\":\"o5676\",\"store_time\":1603431655942,\"field_value\":\"0.05\",\"ab_path_2_name\":\"\",\"class\":\"jrx.anyest.engine.base.strategy.event.model.StrategyResultVariable\",\"ab_path_4_name\":\"\",\"ab_path_1_name\":\"\",\"field_name\":\"接口公积金单位缴存比例\",\"parent_field_name\":\"\",\"extra_1\":\"\",\"ab_path_3_name\":\"\",\"extra_2\":\"\",\"event_id\":\"160343165234560653661\",\"extra_3\":\"\",\"parent_field\":\"\",\"field_type\":\"CONDITION_FIELD\",\"event_time\":1603431652345,\"field_object_code\":\"5392\"},\"database\":\"\",\"offset\":0,\"partition\":0,\"table\":\"stg_event_var_ccreditikifhtrjf\",\"ts\":0,\"type\":\"INSERT\"}";
         send(key, value);
     }
 
     public static void send(String key, String msg) {
         producer.beginTransaction();
-        log.info("发送数据 key:{},msg:{}",key,msg);
+        log.info("发送数据 key:{},msg:{}", key, msg);
         producer.send(new ProducerRecord<String, String>(TOPIC, key, msg));
         producer.commitTransaction();
     }
-
 
 
 }
