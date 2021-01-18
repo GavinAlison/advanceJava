@@ -35,7 +35,7 @@ public class SpringbootTest {
 //    }
 
     @Test
-    @KafkaListener(topics = "topic")
+    @KafkaListener(topics = "topic", groupId = "test-hy")
     public void listen(ConsumerRecord<?, ?> cr) throws Exception {
         logger.info(cr.toString());
         latch.countDown();

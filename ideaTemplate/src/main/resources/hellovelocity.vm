@@ -1,0 +1,22 @@
+#set($originName = $helper.getPropertyName($field, $project))
+#set($origin=$StringUtils.camlcase("pmHtModel"))
+#set($capitalizeName = $originName)
+#set($resStr="")
+@Column(name = "$origin")
+#if($field.modifierStatic)
+static ##
+#end
+$field.type ##
+#set($name = $StringUtil.capitalizeWithJavaBeanConvention($StringUtil.sanitizeJavaIdentifier($originName)))
+#if ($field.boolean && $field.primitive)
+is##
+#else
+get##
+#end
+${name}() {
+#if($field.date)
+return $field.name != null ? (Date)${field.name}.clone() : null;
+#else
+return $field.name;
+#end
+}

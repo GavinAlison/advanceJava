@@ -15,7 +15,7 @@ cd /opt/
 
 #1.下载安装包
 #url=https://mirrors.tuna.tsinghua.edu.cn/mysql/downloads/MySQL-5.6/mysql-5.6.45.tar.gz
-#url=http://cdn.mysql.com/archives/mysql-5.6/mysql-5.6.26-linux-glibc2.5-x86_64.tar.gz
+url=http://cdn.mysql.com/archives/mysql-5.6/mysql-5.6.26-linux-glibc2.5-x86_64.tar.gz
 wget $url
 #2.解压安装包
 tar zxvf mysql-5.6.26-linux-glibc2.5-x86_64.tar.gz
