@@ -70,11 +70,12 @@ public class MeasureSumPerf {
     }
 
     @Test
-    public void measureStream() {
+    public void measureStream() throws InterruptedException {
         System.out.println("Sequential sum done in:" +
                 measureSumPerf(ParallelStreams::streamMap, 10) + " msecs");
         System.out.println("Sequential sum done in:" +
-                measureSumPerf(ParallelStreams::iterativeSum, 10_000_000L) + " msecs");
+                measureSumPerf(ParallelStreams::iterativeSum, 100_000_000L) + " msecs");
+        TimeUnit.HOURS.sleep(1);
     }
 
     static class ParallelStreams {
