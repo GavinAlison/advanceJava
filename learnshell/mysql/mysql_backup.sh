@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 set  -u
 set  -e
 time1=` date  +%Y%m%d `
