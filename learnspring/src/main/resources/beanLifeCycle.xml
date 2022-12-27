@@ -1,23 +1,25 @@
-<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<?xml version="1.0" encoding="UTF-8"?>
 
-<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
-<!--       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
-<!--       xmlns:p="http://www.springframework.org/schema/p"-->
-<!--       xsi:schemaLocation="-->
-<!--            http://www.springframework.org/schema/beans-->
-<!--            http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
-<!--    <bean id="beanPostProcessor" class="com.alison.spring.beanLifeCycle.MyBeanPostProcessor">-->
-<!--    </bean>-->
+    <bean id="beanPostProcessor" class="com.alison.spring.beanLifeCycle.MyBeanPostProcessor">
+    </bean>
 
-<!--    <bean id="instantiationAwareBeanPostProcessor" class="com.alison.spring.beanLifeCycle.MyInstantiationAwareBeanPostProcessor">-->
-<!--    </bean>-->
+    <bean id="instantiationAwareBeanPostProcessor" class="com.alison.spring.beanLifeCycle.MyInstantiationAwareBeanPostProcessor">
+    </bean>
 
-<!--    <bean id="beanFactoryPostProcessor" class="com.alison.spring.beanLifeCycle.MyBeanFactoryPostProcessor">-->
-<!--    </bean>-->
+    <bean id="beanFactoryPostProcessor" class="com.alison.spring.beanLifeCycle.MyBeanFactoryPostProcessor">
+    </bean>
 
-<!--    <bean id="person" class="com.alison.spring.beanLifeCycle.Person" init-method="myInit"-->
-<!--          destroy-method="myDestory" scope="singleton" p:name="张三" p:address="广州"-->
-<!--          p:phone="182" />-->
-
-<!--</beans>-->
+    <bean id="person" class="com.alison.spring.beanLifeCycle.Person" init-method="myInit"
+          destroy-method="myDestory" scope="singleton" p:name="张三" p:address="广州"
+          p:phone="182" />
+    <bean id="person2" class="com.alison.spring.beanLifeCycle.Person2" init-method="myInit"
+          destroy-method="myDestory" scope="singleton" p:name="张三" p:address="广州"
+          p:phone="182" />
+</beans>

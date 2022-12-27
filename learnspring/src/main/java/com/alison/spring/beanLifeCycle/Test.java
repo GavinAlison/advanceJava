@@ -16,8 +16,10 @@ public class Test {
         //得到Preson，并使用
         Person person = factory.getBean("person",Person.class);
         System.out.println(person);
-
+        Person2 person2 = factory.getBean("person2",Person2.class);
+        System.out.println(person2);
         System.out.println("Test-->现在开始关闭容器！");
+
         ((ClassPathXmlApplicationContext)factory).registerShutdownHook();
         /*
 Test-->1. 现在开始初始化容器
