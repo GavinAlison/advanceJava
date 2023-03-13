@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active: ${PROFILES_ACTIVE:local}
+  application:
+    name: rongan-api
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVICE_HOST:192.168.0.233}:${NACOS_SERVICE_PORT:8848} #Nacos服务注册中心地址
+        namespace: ${NACOS_NAMESPACE:rongan-local}
+        username: ${NACOS_USERNAME:nacos}
+        password: ${NACOS_PASSWORD:nacos}
+      config:
+        enabled: false
+    loadbalancer:
+      ribbon:
+        enabled: false
