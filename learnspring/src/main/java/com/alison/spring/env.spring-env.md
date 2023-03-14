@@ -16,7 +16,7 @@ MyInstantiationAwareBeanPostProcessor-->3. 开始进行实例化bean
 MyInstantiationAwareBeanPostProcessor-->3.1. 调用InstantiationAwareBeanPostProcessor的postProcessBeforeInstantiation方法
 Person-->3.2. 调用Person的构造器
 MyInstantiationAwareBeanPostProcessor-->3.3. 调用InstantiationAwareBeanPostProcessor的postProcessAfterInstantiation方法
-MyInstantiationAwareBeanPostProcessor-->3.4. 调用InstantiationAwareBeanPostProcessor的postProcessPropertyValues方法
+MyInstantiationAwareBeanPostProcessor-->3.4. 调用InstantiationAwareBeanPostProcessosr的postProcessPropertyValues方法
 Person-->【注入属性】注入属性address
 Person-->【注入属性】注入属性name
 Person-->【注入属性】注入属性phone
